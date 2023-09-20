@@ -1,0 +1,132 @@
+excluded:
+  - Tests
+  - Package.swift
+  - .build
+
+# Rules
+
+disabled_rules:
+  - trailing_comma
+  - todo
+  - opening_brace
+
+opt_in_rules: # some rules are only opt-in
+  - anyobject_protocol
+  - array_init
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - convenience_type
+  - discouraged_object_literal
+  - discouraged_optional_boolean
+  - empty_collection_literal
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - enum_case_associated_values_count
+  - explicit_init
+  - fallthrough
+  - fatal_error_message
+  - file_name
+  - file_types_order
+  - first_where
+  - flatmap_over_map_reduce
+  - force_unwrapping
+  - ibinspectable_in_extension
+  - identical_operands
+  - implicit_return
+  - inert_defer
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - legacy_random
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - no_space_in_method_call
+  - operator_usage_whitespace
+  - optional_enum_case_matching
+  - orphaned_doc_comment
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
+  - prefixed_toplevel_constant
+  - private_action
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_objc_attribute
+  - redundant_type_annotation
+  - required_enum_case
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - strict_fileprivate
+  - switch_case_on_newline
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unowned_variable_capture
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - xct_specific_matcher
+  - yoda_condition
+  
+force_cast: warning
+force_try: warning
+
+identifier_name:
+  excluded:
+    - id
+    - URL
+
+analyzer_rules:
+  - unused_import
+  - unused_declaration
+
+line_length:
+  warning: 130
+  error: 200
+  
+type_body_length:
+  warning: 300
+  error: 400
+  
+file_length:
+  warning: 500
+  error: 1200
+  
+function_body_length:
+  warning: 30
+  error: 50
+  
+large_tuple:
+  error: 3
+  
+nesting:
+  type_level:
+    warning: 2
+  statement_level:
+    warning: 10
+
+type_name:
+  max_length:
+    warning: 40
+    error: 50

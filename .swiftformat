@@ -1,0 +1,64 @@
+# Stream rules
+
+--swiftversion 5.7
+
+# Use 'swiftformat --options' to list all of the possible options
+
+--header "\nValidator\nCopyright © {created.year} Space Code. All rights reserved.\n//"
+
+--enable blankLinesBetweenScopes
+--enable blankLinesAtStartOfScope
+--enable blankLinesAtEndOfScope
+--enable blankLinesAroundMark
+--enable anyObjectProtocol
+--enable consecutiveBlankLines
+--enable consecutiveSpaces
+--enable duplicateImports
+--enable elseOnSameLine
+--enable emptyBraces
+--enable initCoderUnavailable
+--enable leadingDelimiters
+--enable numberFormatting
+--enable preferKeyPath
+--enable redundantBreak
+--enable redundantExtensionACL
+--enable redundantFileprivate
+--enable redundantGet
+--enable redundantInit
+--enable redundantLet
+--enable redundantLetError
+--enable redundantNilInit
+--enable redundantObjc
+--enable redundantParens
+--enable redundantPattern
+--enable redundantRawValues
+--enable redundantReturn
+--enable redundantSelf
+--enable redundantVoidReturnType
+--enable semicolons
+--enable sortedImports
+--enable sortedSwitchCases
+--enable spaceAroundBraces
+--enable spaceAroundBrackets
+--enable spaceAroundComments
+--enable spaceAroundGenerics
+--enable spaceAroundOperators
+--enable spaceInsideBraces
+--enable spaceInsideBrackets
+--enable spaceInsideComments
+--enable spaceInsideGenerics
+--enable spaceInsideParens
+--enable strongOutlets
+--enable strongifiedSelf
+--enable todos
+--enable trailingClosures
+--enable unusedArguments
+--enable void
+--enable markTypes
+--enable isEmpty
+
+# format options
+
+--wraparguments before-first
+--wrapcollections before-first
+--maxwidth 140
