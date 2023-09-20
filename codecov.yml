@@ -1,0 +1,48 @@
+codecov:
+  # Require CI to pass to show coverage, default yes
+  require_ci_to_pass: yes
+  notify:
+    # Codecov should wait for all CI statuses to complete, default yes
+    wait_for_ci: yes
+
+coverage:
+  # Coverage precision range 0-5, default 2
+  precision: 2
+
+  # Direction to round the coverage value - up, down, nearest, default down
+  round: nearest
+
+  # Value range for red...green, default 70...100 
+  range: "70...90"
+
+  status:
+    # Overall project coverage, compare against pull request base
+    project:
+      default:
+        # The required coverage value
+        target: 50%
+
+        # The leniency in hitting the target. Allow coverage to drop by X%
+        threshold: 5%
+
+    # Only measure lines adjusted in the pull request or single commit, if the commit in not in the pr
+    patch:
+      default:
+        # The required coverage value
+        target: 85%
+
+        # Allow coverage to drop by X%
+        threshold: 5%
+    changes: no
+
+comment:
+  # Pull request Codecov comment format.
+  # diff: coverage diff of the pull request
+  # files: a list of files impacted by the pull request (coverage changes, file is new or removed)
+  layout: "diff, files"         
+
+  # Update Codecov comment, if exists. Otherwise post new
+  behavior: default              
+  
+  # If true, only post the Codecov comment if coverage changes
+  require_changes: false   
