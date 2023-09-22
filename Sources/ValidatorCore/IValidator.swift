@@ -15,25 +15,6 @@ public protocol IValidator {
     ///   - rule: The validation rule.
     ///
     /// - Returns: A validation result.
-    func validate<T: IValidationRule>(input: T.Input, rule: T) -> ValidationResult
-
-    /// Validates an input value.
-    ///
-    /// - Parameters:
-    ///   - input: The input value.
-    ///   - rules: The validation rules array.
-    ///
-    /// - Returns: A validation result.
-    func validate<T>(input: T, rules: [AnyValidationRule<T>]) -> ValidationResult
-
-    /// Validates an input value.
-    ///
-    /// - Parameters:
-    ///   - input: The input value.
-    ///   - rule: The validation rule.
-    ///
-    /// - Returns: A validation result.
-    @available(macOS 13.0, iOS 16, tvOS 16, watchOS 9, *)
     func validate<T>(input: T, rule: some IValidationRule<T>) -> ValidationResult
 
     /// Validates an input value.
@@ -43,6 +24,5 @@ public protocol IValidator {
     ///   - rules: The validation rules array.
     ///
     /// - Returns: A validation result.
-    @available(macOS 13.0, iOS 16, tvOS 16, watchOS 9, *)
     func validate<T>(input: T, rules: [any IValidationRule<T>]) -> ValidationResult
 }

@@ -24,7 +24,7 @@ public struct LengthValidationRule: IValidationRule {
 
     // MARK: Initialization
 
-    public init(min: Int, max: Int, error: IValidationError) {
+    public init(min: Int = .zero, max: Int = .max, error: IValidationError) {
         self.min = min
         self.max = max
         self.error = error

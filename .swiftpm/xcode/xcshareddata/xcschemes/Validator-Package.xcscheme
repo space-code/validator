@@ -65,13 +65,6 @@
             BlueprintName = "ValidatorCore"
             ReferencedContainer = "container:">
          </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ValidatorUI"
-            BuildableName = "ValidatorUI"
-            BlueprintName = "ValidatorUI"
-            ReferencedContainer = "container:">
-         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -81,6 +74,26 @@
                BlueprintIdentifier = "ValidatorTests"
                BuildableName = "ValidatorTests"
                BlueprintName = "ValidatorTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ValidatorCoreTests"
+               BuildableName = "ValidatorCoreTests"
+               BlueprintName = "ValidatorCoreTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ValidatorUITests"
+               BuildableName = "ValidatorUITests"
+               BlueprintName = "ValidatorUITests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
