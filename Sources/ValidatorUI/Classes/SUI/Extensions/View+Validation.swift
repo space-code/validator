@@ -14,6 +14,29 @@ public extension View {
     /// Validate a binding item using a set of validation rules and perform an action based on
     /// the validation result.
     ///
+    /// This function takes a binding item, a validation rule, and a closure to handle
+    /// the validation result.
+    /// It validates the wrapped value of the binding item against the specified rule and then
+    /// invokes the provided action with the result.
+    ///
+    /// - Parameters:
+    ///   - item: The binding item to validate.
+    ///   - rule: A validation rule to apply to the item's value.
+    ///   - action: A closure that takes a `ValidationResult` as its parameter.
+    ///             This closure is called with the validation result after the validation is performed.
+    ///
+    /// - Returns: A view that can be modified further or used in your SwiftUI hierarchy.
+    func validation<T>(
+        _ item: Binding<T>,
+        rule: some IValidationRule<T>,
+        action: @escaping (ValidationResult) -> Void
+    ) -> some View {
+        validation(item, rules: [rule], action: action)
+    }
+
+    /// Validate a binding item using a set of validation rules and perform an action based on
+    /// the validation result.
+    ///
     /// This function takes a binding item, an array of validation rules, and a closure to handle
     /// the validation result.
     /// It validates the wrapped value of the binding item against the specified rules and then
