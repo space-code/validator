@@ -1,0 +1,65 @@
+name: "validator"
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    paths:
+      - '.swiftlint.yml'
+    branches:
+      - main
+      - dev
+
+concurrency:
+  group: ci
+  cancel-in-progress: true
+
+jobs:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
+  Latest:
+    name: Test Latest (iOS, macOS, tvOS, watchOS)
+    runs-on: macOS-12
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_14.1.app/Contents/Developer"
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: "OS=16.1,name=iPhone 14 Pro"
+            name: "iOS"
+            scheme: "Validator-Package"
+            sdk: iphonesimulator
+          - destination: "OS=16.1,name=Apple TV"
+            name: "tvOS"
+            scheme: "Validator-Package"
+            sdk: appletvsimulator
+          - destination: "OS=9.1,name=Apple Watch Series 8 (45mm)"
+            name: "watchOS"
+            scheme: "Validator-Package"
+            sdk: watchsimulator
+          - destination: "platform=macOS"
+            name: "macOS"
+            scheme: "Validator-Package"
+            sdk: macosx
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.name }}
+        run: xcodebuild test -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "./${{ matrix.sdk }}.xcresult" | xcpretty -r junit
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          xcode: true
+          xcode_archive_path: "./${{ matrix.sdk }}.xcresult"
