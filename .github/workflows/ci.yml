@@ -8,13 +8,10 @@ on:
   pull_request:
     paths:
       - '.swiftlint.yml'
-    branches:
-      - main
-      - dev
-
-concurrency:
-  group: ci
-  cancel-in-progress: true
+      - ".github/workflows/**"
+      - "Package.swift"
+      - "Source/**"
+      - "Tests/**"
 
 jobs:
   SwiftLint:
@@ -27,39 +24,176 @@ jobs:
           args: --strict
         env:
           DIFF_BASE: ${{ github.base_ref }}
-  Latest:
-    name: Test Latest (iOS, macOS, tvOS, watchOS)
-    runs-on: macOS-12
+  macOS:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
     env:
-      DEVELOPER_DIR: "/Applications/Xcode_14.1.app/Contents/Developer"
-    timeout-minutes: 10
+      DEVELOPER_DIR: "/Applications/${{ matrix.xcode }}.app/Contents/Developer"
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
         include:
-          - destination: "OS=16.1,name=iPhone 14 Pro"
-            name: "iOS"
-            scheme: "Validator-Package"
-            sdk: iphonesimulator
-          - destination: "OS=16.1,name=Apple TV"
-            name: "tvOS"
-            scheme: "Validator-Package"
-            sdk: appletvsimulator
-          - destination: "OS=9.1,name=Apple Watch Series 8 (45mm)"
-            name: "watchOS"
-            scheme: "Validator-Package"
-            sdk: watchsimulator
-          - destination: "platform=macOS"
-            name: "macOS"
-            scheme: "Validator-Package"
-            sdk: macosx
+          - xcode: "Xcode_15.0"
+            runsOn: macos-13
+            name: "macOS 13, Xcode 15.0, Swift 5.9.0"
+          - xcode: "Xcode_14.3.1"
+            runsOn: macos-13
+            name: "macOS 13, Xcode 14.3.1, Swift 5.8.0"
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
-        run: xcodebuild test -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "./${{ matrix.sdk }}.xcresult" | xcpretty -r junit
+        run: xcodebuild test -scheme "Validator-Package" -destination "platform=macOS" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3.1.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           xcode: true
-          xcode_archive_path: "./${{ matrix.sdk }}.xcresult"
+          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: test_output
+
+  iOS:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    env:
+      DEVELOPER_DIR: "/Applications/${{ matrix.xcode }}.app/Contents/Developer"
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: "OS=17.0.1,name=iPhone 14 Pro"
+            name: "iOS 17.0.1"
+            xcode: "Xcode_15.0"
+            runsOn: macos-13
+          - destination: "OS=16.4,name=iPhone 14 Pro"
+            name: "iOS 16.4"
+            xcode: "Xcode_14.3.1"
+            runsOn: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.name }}
+        run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: test_output
+
+  tvOS:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    env:
+      DEVELOPER_DIR: "/Applications/${{ matrix.xcode }}.app/Contents/Developer"
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: "OS=17.0,name=Apple TV"
+            name: "tvOS 17.0"
+            xcode: "Xcode_15.0"
+            runsOn: macos-13
+          - destination: "OS=16.4,name=Apple TV"
+            name: "tvOS 16.4"
+            xcode: "Xcode_14.3.1"
+            runsOn: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.name }}
+        run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          xcode: true
+          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: test_output
+
+  watchOS:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    env:
+      DEVELOPER_DIR: "/Applications/${{ matrix.xcode }}.app/Contents/Developer"
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - destination: "OS=10.0,name=Apple Watch Series 9 (45mm)"
+            name: "watchOS 10.0"
+            xcode: "Xcode_15.0"
+            runsOn: macos-13
+          - destination: "OS=9.4,name=Apple Watch Series 8 (45mm)"
+            name: "watchOS 9.4"
+            xcode: "Xcode_14.3.1"
+            runsOn: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.name }}
+        run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          xcode: true
+          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: test_output
+
+  spm:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runsOn }}
+    env:
+      DEVELOPER_DIR: "/Applications/${{ matrix.xcode }}.app/Contents/Developer"
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "Xcode 15"
+            xcode: "Xcode_15.0"
+            runsOn: macos-13
+          - name: "Xcode 14"
+            xcode: "Xcode_14.3.1"
+            runsOn: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: ${{ matrix.name }}
+        run: swift build -c release
+
+  merge-test-reports:
+    needs: [iOS, macOS, watchOS, tvOS]
+    runs-on: macos-13
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: test_output
+      - run: xcrun xcresulttool merge test_output/**/*.xcresult --output-path test_output/final/final.xcresult
+      - name: Upload Merged Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MergedResult
+          path: test_output/final
+
+  discover-typos:
+    name: Discover Typos
+    runs-on: macOS-12
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v2
+      - name: Discover typos
+        run: |
+          export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.11/bin"
+          python3 -m pip install --upgrade pip
+          python3 -m pip install codespell
+          codespell --ignore-words-list="hart,inout,msdos,sur" --skip="./.build/*,./.git/*"
