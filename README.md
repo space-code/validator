@@ -3,9 +3,9 @@
 <h1 align="center" style="margin-top: 0px;">validator</h1>
 
 <p align="center">
-<a href="https://github.com/space-code/validator/blob/main/LICENSE"><img alt="Liscence" src="https://img.shields.io/cocoapods/l/service-core.svg?style=flat"></a> 
-<a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-%23989898"/></a> 
-<a href="https://developer.apple.com/swift"><img alt="Swift5.5" src="https://img.shields.io/badge/language-Swift5.7-orange.svg"/></a>
+<a href="https://github.com/space-code/validator/blob/main/LICENSE"><img alt="Licence" src="https://img.shields.io/cocoapods/l/service-core.svg?style=flat"></a> 
+<a href="https://swiftpackageindex.com/space-code/validator"><img alt="Swift Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dswift-versions"/></a> 
+<a href="https://swiftpackageindex.com/space-code/validator"><img alt="Platform Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dplatforms"/></a> 
 <a href="https://github.com/space-code/validator"><img alt="CI" src="https://github.com/space-code/validator/actions/workflows/ci.yml/badge.svg?branch=main"></a>
 <a href="https://github.com/apple/swift-package-manager" alt="Validator on Swift Package Manager" title="Validator on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
 <a href="https://codecov.io/gh/space-code/validator" >  <img src="https://codecov.io/gh/space-code/validator/graph/badge.svg?token=3B8FE96372"/>  </a>
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         textField.add(rule: LengthValidationRule(max: 10, error: "error text"))
         /// Enables automatic validation on input change.
         textField.validateOnInputChange(isEnabled: true)
-        /// Handels validation result.
+        /// Handle the validation result.
         textField.validationHandler = { result in
             switch result {
             case .valid:
@@ -182,7 +182,7 @@ struct ContentView: View {
                 if value {
                     print("The form's fields are valid")
                 } else {
-                    print("The form's fileds aren't valid")
+                    print("The form's fields aren't valid")
                 }
             }
         )
