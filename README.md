@@ -3,7 +3,7 @@
 <h1 align="center" style="margin-top: 0px;">validator</h1>
 
 <p align="center">
-<a href="https://github.com/space-code/validator/blob/main/LICENSE"><img alt="Liscence" src="https://img.shields.io/cocoapods/l/service-core.svg?style=flat"></a> 
+<a href="https://github.com/space-code/validator/blob/main/LICENSE"><img alt="Licence" src="https://img.shields.io/cocoapods/l/service-core.svg?style=flat"></a> 
 <a href="https://swiftpackageindex.com/space-code/validator"><img alt="Swift Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dswift-versions"/></a> 
 <a href="https://swiftpackageindex.com/space-code/validator"><img alt="Platform Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dplatforms"/></a> 
 <a href="https://github.com/space-code/validator"><img alt="CI" src="https://github.com/space-code/validator/actions/workflows/ci.yml/badge.svg?branch=main"></a>
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         textField.add(rule: LengthValidationRule(max: 10, error: "error text"))
         /// Enables automatic validation on input change.
         textField.validateOnInputChange(isEnabled: true)
-        /// Handels validation result.
+        /// Handle the validation result.
         textField.validationHandler = { result in
             switch result {
             case .valid:
@@ -182,7 +182,7 @@ struct ContentView: View {
                 if value {
                     print("The form's fields are valid")
                 } else {
-                    print("The form's fileds aren't valid")
+                    print("The form's fields aren't valid")
                 }
             }
         )
