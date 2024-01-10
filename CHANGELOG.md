@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Integrate `danger`
+  - Added in Pull Request [#9](https://github.com/space-code/validator/pull/9).
 - Add an issue template & a pull request template
   - Added in Pull Request [#8](https://github.com/space-code/validator/pull/8).
 -  Update GitHub Action Configuration
