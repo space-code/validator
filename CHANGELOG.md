@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
--  Update GitHub Action Confguration
+-  Update GitHub Action Configuration
   - Added in Pull Request [#7](https://github.com/space-code/validator/pull/7).
 - Add `Swift Compatibility` & `Platform Compatibility` badges
   - Added in Pull Request [#6](https://github.com/space-code/validator/pull/6).
