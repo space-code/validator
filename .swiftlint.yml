@@ -1,6 +1,8 @@
 excluded:
   - Tests
   - Package.swift
+  - Package@swift-5.7.swift
+  - Package@swift-5.8.swift
   - .build
 
 # Rules
