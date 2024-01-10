@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+- Add `Swift Compatibility` & `Platform Compatibility` badges
+  - Added in Pull Request [#6](https://github.com/space-code/validator/pull/6).
+
 #### 1.x Releases
 - `1.0.x` Releases - [1.0.0](#100)
 
