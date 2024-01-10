@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+- Add an issue template & a pull request template
+  - Added in Pull Request [#8](https://github.com/space-code/validator/pull/8).
 -  Update GitHub Action Configuration
   - Added in Pull Request [#7](https://github.com/space-code/validator/pull/7).
 - Add `Swift Compatibility` & `Platform Compatibility` badges
