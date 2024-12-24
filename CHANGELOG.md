@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+#### Added
+- Increase the Swift version to 6.0.
+  - Added in Pull Request [#13](https://github.com/space-code/validator/pull/13).
+
 #### 1.x Releases
 - `1.0.x` Releases - [1.0.0](#100) | [1.0.1](#101)
 
