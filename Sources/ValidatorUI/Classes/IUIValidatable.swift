@@ -8,6 +8,7 @@ import ValidatorCore
 
 // MARK: - IUIValidatable
 
+@MainActor
 public protocol IUIValidatable: AnyObject {
     associatedtype Input
 

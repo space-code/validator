@@ -13,26 +13,13 @@ import XCTest
 
 #if os(iOS)
     final class UITextFieldTests: XCTestCase {
-        // MARK: Properties
-
-        private var textField: UITextField!
-
-        // MARK: XCTestCase
-
-        override func setUp() {
-            super.setUp()
-            textField = UITextField()
-        }
-
-        override func tearDown() {
-            textField = nil
-            super.tearDown()
-        }
-
         // MARK: Tests
 
+        @MainActor
         func test_thatTextFieldValidationReturnsValid_whenInputValueIsValid() {
             // given
+            let textField = UITextField()
+
             textField.validateOnInputChange(isEnabled: true)
             textField.add(rule: LengthValidationRule(max: .max, error: String.error))
 
@@ -49,8 +36,11 @@ import XCTest
             else { XCTFail("The result must be equal to the valid value") }
         }
 
+        @MainActor
         func test_thatTextFieldValidationReturnsInvalid_whenInputValueIsInvalid() {
             // given
+            let textField = UITextField()
+
             textField.validateOnInputChange(isEnabled: true)
             textField.add(rule: LengthValidationRule(max: .max, error: String.error))
 
