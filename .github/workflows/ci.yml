@@ -50,16 +50,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "platform=macOS" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   iOS:
     name: ${{ matrix.name }}
@@ -134,16 +130,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   watchOS:
     name: ${{ matrix.name }}
@@ -179,16 +171,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   spm:
     name: ${{ matrix.name }}
