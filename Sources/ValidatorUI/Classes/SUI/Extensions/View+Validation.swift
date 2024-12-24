@@ -3,12 +3,16 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-// swiftlint:disable prefixed_toplevel_constant
-
 import SwiftUI
 import ValidatorCore
 
-private let validator = Validator()
+#if swift(>=5.10)
+    // swiftlint:disable:next prefixed_toplevel_constant
+    private nonisolated(unsafe) let validator = Validator()
+#else
+    // swiftlint:disable:next prefixed_toplevel_constant
+    private let validator = Validator()
+#endif
 
 public extension View {
     /// Validate a binding item using a set of validation rules and perform an action based on

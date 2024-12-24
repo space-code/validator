@@ -34,6 +34,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - xcode: "Xcode_16.0"
+            runsOn: macOS-14
+            name: "macOS 14, Xcode 16.0, Swift 6.0"
+          - xcode: "Xcode_15.4"
+            runsOn: macOS-14
+            name: "macOS 14, Xcode 15.4, Swift 5.10"
           - xcode: "Xcode_15.0"
             runsOn: macos-13
             name: "macOS 13, Xcode 15.0, Swift 5.9.0"
@@ -44,16 +50,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "platform=macOS" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   iOS:
     name: ${{ matrix.name }}
@@ -65,6 +67,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - destination: "OS=18.1,name=iPhone 16 Pro"
+            name: "iOS 18.1"
+            xcode: "Xcode_16.1"
+            runsOn: macOS-14
+          - destination: "OS=18.0,name=iPhone 16 Pro"
+            name: "iOS 18.0"
+            xcode: "Xcode_16.0"
+            runsOn: macOS-14
+          - destination: "OS=17.5,name=iPhone 15 Pro"
+            name: "iOS 17.5"
+            xcode: "Xcode_15.4"
+            runsOn: macOS-14
           - destination: "OS=17.0.1,name=iPhone 14 Pro"
             name: "iOS 17.0.1"
             xcode: "Xcode_15.0"
@@ -92,6 +106,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - destination: "OS=18.1,name=Apple TV"
+            name: "tvOS 18.1"
+            xcode: "Xcode_16.1"
+            runsOn: macOS-14
+          - destination: "OS=18.0,name=Apple TV"
+            name: "tvOS 18.0"
+            xcode: "Xcode_16.0"
+            runsOn: macOS-14
+          - destination: "OS=17.5,name=Apple TV"
+            name: "tvOS 17.5"
+            xcode: "Xcode_15.4"
+            runsOn: macOS-14
           - destination: "OS=17.0,name=Apple TV"
             name: "tvOS 17.0"
             xcode: "Xcode_15.0"
@@ -104,16 +130,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   watchOS:
     name: ${{ matrix.name }}
@@ -125,6 +147,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - destination: "OS=11.1,name=Apple Watch Series 10 (46mm)"
+            name: "watchOS 11.1"
+            xcode: "Xcode_16.1"
+            runsOn: macOS-14
+          - destination: "OS=11.0,name=Apple Watch Series 10 (46mm)"
+            name: "watchOS 11.0"
+            xcode: "Xcode_16.0"
+            runsOn: macOS-14
+          - destination: "OS=10.5,name=Apple Watch Series 9 (45mm)"
+            name: "watchOS 10.5"
+            xcode: "Xcode_15.4"
+            runsOn: macOS-14
           - destination: "OS=10.0,name=Apple Watch Series 9 (45mm)"
             name: "watchOS 10.0"
             xcode: "Xcode_15.0"
@@ -137,16 +171,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
         run: xcodebuild test -scheme "Validator-Package" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "test_output/${{ matrix.name }}.xcresult" || exit 1
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3.1.0
+      - name: Upload test coverage reports to Codecov
+        uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
+          scheme_name: Typhoon
+          filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          xcode: true
-          xcode_archive_path: test_output/${{ matrix.name }}.xcresult
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: test_output
 
   spm:
     name: ${{ matrix.name }}
@@ -158,10 +188,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: "Xcode 15"
+          - name: "macOS 14, SPM 6.0.2 Test"
+            xcode: "Xcode_16.1"
+            runsOn: macOS-14
+          - name: "macOS 14, SPM 6.0.0 Test"
+            xcode: "Xcode_16.0"
+            runsOn: macOS-14
+          - name: "macOS 14, SPM 5.9.0 Test"
             xcode: "Xcode_15.0"
-            runsOn: macos-13
-          - name: "Xcode 14"
+            runsOn: macos-14
+          - name: "macOS 13, SPM 5.8.1 Test"
             xcode: "Xcode_14.3.1"
             runsOn: macos-13
     steps:
@@ -186,7 +222,7 @@ jobs:
 
   discover-typos:
     name: Discover Typos
-    runs-on: macOS-12
+    runs-on: macOS-13
     env:
       DEVELOPER_DIR: /Applications/Xcode_14.1.app/Contents/Developer
     steps:
