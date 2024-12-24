@@ -12,6 +12,10 @@ Released on 2024-12-24.
 - Increase the Swift version to 6.0.
   - Added in Pull Request [#13](https://github.com/space-code/validator/pull/13).
 
+#### Updated
+- Update gem dependencies.
+  - Updated in Pull Request [#15](https://github.com/space-code/validator/pull/15).
+
 ## [1.0.1](https://github.com/space-code/validator/releases/tag/1.0.1)
 Released on 2024-01-10.
 
