@@ -244,7 +244,7 @@ Once you have your Swift package set up, adding `validator` as a dependency is a
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/validator.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/space-code/validator.git", .upToNextMajor(from: "1.1.0"))
 ]
 ```
 
