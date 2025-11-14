@@ -1,4 +1,4 @@
-![Validator: xxxxx](https://raw.githubusercontent.com/space-code/validator/dev/Resources/validator.png)
+![Validator: is a framework written in Swift that provides functions that can be used to validate the contents of an input value.](https://raw.githubusercontent.com/space-code/validator/dev/Resources/validator.png)
 
 <h1 align="center" style="margin-top: 0px;">validator</h1>
 
@@ -232,8 +232,8 @@ public struct NonEmptyValidationRule: IValidationRule {
 
 ## Requirements
 - iOS 16.0+ / macOS 13+ / tvOS 16.0+ / watchOS 9.0+
-- Xcode 14.0
-- Swift 5.7
+- Xcode 15.3
+- Swift 5.10
 
 ## Installation
 ### Swift Package Manager
@@ -244,7 +244,7 @@ Once you have your Swift package set up, adding `validator` as a dependency is a
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/validator.git", .upToNextMajor(from: "1.1.0"))
+    .package(url: "https://github.com/space-code/validator.git", .upToNextMajor(from: "1.2.0"))
 ]
 ```
 

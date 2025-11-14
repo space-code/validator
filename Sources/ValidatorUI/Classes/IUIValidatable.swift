@@ -37,19 +37,11 @@ public protocol IUIValidatable: AnyObject {
     func validateOnInputChange(isEnabled: Bool)
 }
 
-#if swift(>=5.10)
-    private nonisolated(unsafe) var kValidationRules: UInt8 = 0
-    private nonisolated(unsafe) var kValidationHandler: UInt8 = 0
+private nonisolated(unsafe) var kValidationRules: UInt8 = 0
+private nonisolated(unsafe) var kValidationHandler: UInt8 = 0
 
-    // swiftlint:disable:next prefixed_toplevel_constant
-    private nonisolated(unsafe) let validator = Validator()
-#else
-    private var kValidationRules: UInt8 = 0
-    private var kValidationHandler: UInt8 = 0
-
-    // swiftlint:disable:next prefixed_toplevel_constant
-    private let validator = Validator()
-#endif
+// swiftlint:disable:next prefixed_toplevel_constant
+private nonisolated(unsafe) let validator = Validator()
 
 public extension IUIValidatable {
     @discardableResult

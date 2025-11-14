@@ -6,13 +6,8 @@
 import SwiftUI
 import ValidatorCore
 
-#if swift(>=5.10)
-    // swiftlint:disable:next prefixed_toplevel_constant
-    private nonisolated(unsafe) let validator = Validator()
-#else
-    // swiftlint:disable:next prefixed_toplevel_constant
-    private let validator = Validator()
-#endif
+// swiftlint:disable:next prefixed_toplevel_constant
+private nonisolated(unsafe) let validator = Validator()
 
 public extension View {
     /// Validate a binding item using a set of validation rules and perform an action based on

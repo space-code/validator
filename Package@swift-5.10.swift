@@ -16,7 +16,6 @@ let package = Package(
         .library(name: "ValidatorCore", targets: ["ValidatorCore"]),
         .library(name: "ValidatorUI", targets: ["ValidatorUI"]),
     ],
-    dependencies: [],
     targets: [
         .target(name: "ValidatorCore", dependencies: []),
         .target(name: "ValidatorUI", dependencies: ["ValidatorCore"]),
