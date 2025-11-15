@@ -36,14 +36,14 @@ If you need to validate some data, you can use the `Validator` object for this p
 import ValidatorCore
 
 let validator = Validator()
-let result = validator.validate(input: "text", rule: LengthValidationRule(min: 4, error: "error text"))
+let result = validator.validate(input: "text", rule: LengthValidationRule(min: 4, error: "Text must be at least 4 characters long"))
 
 switch result {
 case .valid:
-    print("text is valid")
+    print("Text is valid")
 case let .invalid(errors):
     // handle validation errors
-    print(errors)
+    print("Validation errors: \(errors.map(\.message))")
 }
 ```
 
@@ -66,16 +66,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         /// Adds validation rule to the text field.
-        textField.add(rule: LengthValidationRule(max: 10, error: "error text"))
+        textField.add(rule: LengthValidationRule(max: 10, error: "Text must be at most 10 characters"))
         /// Enables automatic validation on input change.
         textField.validateOnInputChange(isEnabled: true)
         /// Handle the validation result.
         textField.validationHandler = { result in
             switch result {
             case .valid:
-                print("text is valid")
+                print("Text is valid")
             case let .invalid(errors):
-                print(errors)
+                print("Validation errors: \(errors)")
             }
         }
     }
@@ -122,14 +122,14 @@ struct ContentView: View {
     @State private var text: String = ""
     
     private let validationRules: [any IValidationRule<String>] = [
-        LengthValidationRule(max: 10, error: "Text error")
+        LengthValidationRule(max: 10, error: "Text must be at most 10 characters")
     ]
     
     var body: some View {
         VStack {
-            TextField("Text", text: $text)
+            TextField("Enter text", text: $text)
                 .validate(item: $text, rules: validationRules) { errors in
-                    Text("Text is bigger than 10 characters")
+                    Text("Text exceeds 10 characters")
                 }
         }
     }
@@ -149,10 +149,10 @@ class Form: ObservableObject {
     @Published
     var manager = FormFieldManager()
 
-    @FormField(rules: [LengthValidationRule(max: 20, error: "The first name is very long")])
+    @FormField(rules: [LengthValidationRule(max: 20, error: "First name is too long")])
     var firstName: String = ""
 
-    @FormField(rules: [LengthValidationRule(min: 5, error: "The last name is too short")])
+    @FormField(rules: [LengthValidationRule(min: 5, error: "Last name is too short")])
     var lastName: String = ""
     
     lazy var firstNameValidationContainer = _firstName.validate(manager: manager)
@@ -180,9 +180,9 @@ struct ContentView: View {
             form.manager.$isValid,
             perform: { value in
                 if value {
-                    print("The form's fields are valid")
+                    print("All form fields are valid")
                 } else {
-                    print("The form's fields aren't valid")
+                    print("Some form fields are invalid")
                 }
             }
         )
