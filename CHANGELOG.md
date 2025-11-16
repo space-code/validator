@@ -6,7 +6,13 @@ All notable changes to this project will be documented in this file.
 - `1.1.x` Releases - [1.1.0](#110)
 - `1.0.x` Releases - [1.0.0](#100) | [1.0.1](#101)
 
-## [1.1.0](https://github.com/space-code/validator/releases/tag/1.2.0)
+## [Unreleased]
+
+#### Added
+- Add `dependabot.yml`
+  - Added in Pull Request [#21](https://github.com/space-code/validator/pull/21).
+
+## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
 Released on 2025-11-13.
 
 #### Updated
