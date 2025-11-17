@@ -199,6 +199,7 @@ struct ContentView: View {
 | **PrefixValidationRule**   | To validate whether a string contains a prefix                                      |
 | **SuffixValidationRule**   | To validate whether a string contains a suffix                                      |
 | **RegexValidationRule**    | To validate if a pattern is matched                                                 |
+| **URLValidationRule**      | To validate whether a string contains a URL                                         |
 
 ## Custom Validation Rules
 
