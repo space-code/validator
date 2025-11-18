@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file.
   - Added in Pull Request [#25](https://github.com/space-code/validator/pull/25).
 - Add `CreditCardValidationRule`.
   - Added in Pull Request [#26](https://github.com/space-code/validator/pull/26).
+- Add `conventional-pr.yml` for PR validation.
+  - Added in Pull Request [#27](https://github.com/space-code/validator/pull/27).
 
 #### Updated
 - Update `Mintfile`
