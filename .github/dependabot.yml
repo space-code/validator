@@ -16,6 +16,11 @@ updates:
       - ns-vasilev
     reviewers:
       - ns-vasilev
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
 
   - package-ecosystem: swift
     directory: /
@@ -28,3 +33,8 @@ updates:
       - ns-vasilev
     reviewers:
       - ns-vasilev
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
