@@ -24,6 +24,10 @@ All notable changes to this project will be documented in this file.
 - Update `dependabot.yml`
   - Updated in Pull Request [#28](https://github.com/space-code/validator/pull/28).
 
+#### Fixed
+- Fix conventional commit script execution in GitHub Actions
+  - Fixed in Pull Request [#29](https://github.com/space-code/validator/pull/29).
+
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
 Released on 2025-11-13.
 
