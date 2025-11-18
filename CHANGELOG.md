@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 #### Updated
 - Update `Mintfile`
   - Updated in Pull Request [#22](https://github.com/space-code/validator/pull/22).
+- Update `dependabot.yml`
+  - Updated in Pull Request [#28](https://github.com/space-code/validator/pull/28).
 
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
 Released on 2025-11-13.
