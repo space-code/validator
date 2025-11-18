@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
   - Added in Pull Request [#21](https://github.com/space-code/validator/pull/21).
 - Add `URLValidationRule`.
   - Added in Pull Request [#25](https://github.com/space-code/validator/pull/25).
+- Add `CreditCardValidationRule`.
+  - Added in Pull Request [#26](https://github.com/space-code/validator/pull/26).
 
 #### Updated
 - Update `Mintfile`
