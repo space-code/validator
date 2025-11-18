@@ -200,6 +200,7 @@ struct ContentView: View {
 | **SuffixValidationRule**   | To validate whether a string contains a suffix                                      |
 | **RegexValidationRule**    | To validate if a pattern is matched                                                 |
 | **URLValidationRule**      | To validate whether a string contains a URL                                         |
+| **CreditCardValidationRule** | To validate whether a string has a valid credit card number                       |
 
 ## Custom Validation Rules
 
