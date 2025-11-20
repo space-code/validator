@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - main
-      - dev
+    paths:
+      - '.swiftlint.yml'
+      - ".github/workflows/**"
+      - "Package.swift"
+      - "Source/**"
+      - "Tests/**"
   pull_request:
     paths:
       - '.swiftlint.yml'
@@ -12,6 +17,10 @@ on:
       - "Package.swift"
       - "Source/**"
       - "Tests/**"
+
+concurrency:
+  group: validator-${{ github.head_ref }}
+  cancel-in-progress: true
 
 jobs:
   SwiftLint:
@@ -114,7 +123,7 @@ jobs:
       - name: Upload test coverage reports to Codecov
         uses: space-code/oss-common-actions/.github/actions/upload_test_coverage_report@main
         with:
-          scheme_name: Typhoon
+          scheme_name: Validator-Package
           filename: ${{ matrix.name }}
           token: ${{ secrets.CODECOV_TOKEN }}
 
