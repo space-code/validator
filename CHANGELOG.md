@@ -14,10 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Bug Fixes
+- Fix changelog configuration
 - Fix conventional commit script execution in GitHub Actions
   - Fixed by @ns-vasilev in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
 ### Miscellaneous Tasks
+- Add `changelog.yml` workflow
+  - Contributed by @ns-vasilev in Pull Request [#30](https://github.com/space-code/validator/pull/30).
 - Update workflow to run tests and build project
   - Contributed by @ns-vasilev in Pull Request [#33](https://github.com/space-code/validator/pull/33).
 - Merge `dev` into `main`
