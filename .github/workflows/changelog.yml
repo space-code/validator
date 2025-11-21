@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 permissions:
   contents: write
 jobs:
@@ -13,7 +10,10 @@ jobs:
     name: Update CHANGELOG
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    if: "!startsWith(github.event.head_commit.message, '[Release]')"
+    if: |
+      !startsWith(github.event.head_commit.message, '[Release]') &&
+      !startsWith(github.event.head_commit.message, 'docs: update CHANGELOG.md') &&
+      github.event.head_commit.author.name != 'github-actions[bot]'
     steps:
       - uses: actions/checkout@v5
         with:
@@ -39,5 +39,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         if: steps.changelog-changes.outputs.has-changes == 'true'
         with:
-          commit_message: "docs: update CHANGELOG.md"
+          commit_message: "docs: update CHANGELOG.md [skip ci]"
           file_pattern: CHANGELOG.md
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
