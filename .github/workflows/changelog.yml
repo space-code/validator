@@ -1,0 +1,40 @@
+name: Update CHANGELOG
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  changelog:
+    name: Update CHANGELOG
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: "!startsWith(github.event.head_commit.message, '[Release]')"
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: jdx/mise-action@v3
+        with:
+          experimental: true
+      - name: Generate CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git cliff --config ./cliff.toml -o ./CHANGELOG.md
+      - name: Check for CHANGELOG changes
+        id: changelog-changes
+        run: |
+          if git diff --quiet CHANGELOG.md; then
+            echo "No changes in CHANGELOG.md"
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGELOG.md has changes"
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Commit CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v7
+        if: steps.changelog-changes.outputs.has-changes == 'true'
+        with:
+          commit_message: "docs: update CHANGELOG.md"
+          file_pattern: CHANGELOG.md

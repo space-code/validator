@@ -1,0 +1,265 @@
+# git-cliff ~ configuration file
+# https://git-cliff.org/docs/configuration
+
+[remote.github]
+owner = "space-code"
+repo = "validator"
+# If you are using a token to fetch GitHub usernames, uncomment below:
+# token = "${GITHUB_TOKEN}"
+
+[changelog]
+# GUARANTEE: Skip releases if they contain no commits (for tagged versions)
+skip_empty_releases = true
+# Maximum number of releases to display in the changelog
+# number_of_releases = 10 
+
+header = """
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+{#- LOGIC: Generate table of contents - group versions by major version -#}
+{%- set_global major_versions = [] -%}
+{%- for release in releases -%}
+    {%- if release.version -%}
+        {%- set version_clean = release.version | trim_start_matches(pat="v") -%}
+        {%- set major = version_clean | split(pat=".") | first -%}
+        {%- if major not in major_versions -%}
+            {%- set_global major_versions = major_versions | concat(with=major) -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- set sorted_majors = major_versions | sort | reverse -%}
+
+{#- MAIN LOOP: Iterate over major versions -#}
+{%- for major in sorted_majors -%}
+    {#- VISUAL: Add double newline before the header to separate from previous block -#}
+    {{ "\n\n" }}#### {{ major }}.x Releases
+    
+    {#- LOGIC: Filter releases for the current major version -#}
+    {%- set_global major_releases = [] -%}
+    {%- for release in releases -%}
+        {%- if release.version -%}
+            {%- set version_clean = release.version | trim_start_matches(pat="v") -%}
+            {%- set rel_major = version_clean | split(pat=".") | first -%}
+            {%- if rel_major == major -%}
+                {%- set_global major_releases = major_releases | concat(with=version_clean) -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {#- LOGIC: Separate into Stable, RC, and Beta -#}
+    {%- set_global stable_versions = [] -%}
+    {%- set_global rc_versions = [] -%}
+    {%- set_global beta_versions = [] -%}
+    {%- for version in major_releases -%}
+        {%- if version is containing("-rc") -%}
+            {%- set_global rc_versions = rc_versions | concat(with=version) -%}
+        {%- elif version is containing("-beta") -%}
+            {%- set_global beta_versions = beta_versions | concat(with=version) -%}
+        {%- else -%}
+            {%- set_global stable_versions = stable_versions | concat(with=version) -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {#- LOGIC: Group stable versions by minor version -#}
+    {%- set_global minor_versions = [] -%}
+    {%- for version in stable_versions -%}
+        {%- set parts = version | split(pat=".") -%}
+        {%- set minor_key = parts | slice(end=2) | join(sep=".") -%}
+        {%- if minor_key not in minor_versions -%}
+            {%- set_global minor_versions = minor_versions | concat(with=minor_key) -%}
+        {%- endif -%}
+    {%- endfor -%}
+    {%- set sorted_minors = minor_versions | sort | reverse -%}
+
+    {#- OUTPUT: Stable releases -#}
+    {%- for minor_key in sorted_minors -%}
+        {%- set_global minor_release_versions = [] -%}
+        {%- for version in stable_versions -%}
+            {%- set parts = version | split(pat=".") -%}
+            {%- set ver_minor = parts | slice(end=2) | join(sep=".") -%}
+            {%- if ver_minor == minor_key -%}
+                {%- set_global minor_release_versions = minor_release_versions | concat(with=version) -%}
+            {%- endif -%}
+        {%- endfor -%}
+        {%- set versions_list = minor_release_versions | sort | reverse -%}
+{{ "\n" }}- `{{ minor_key }}.x` Releases - {% for version in versions_list -%}
+[{{ version }}](#{{ version | replace(from=".", to="") | replace(from="-", to="") | lower }})
+        {%- if not loop.last %} | {% endif -%}
+    {%- endfor -%}
+    {%- endfor -%}
+
+    {#- OUTPUT: RC versions -#}
+    {%- if rc_versions | length > 0 -%}
+        {%- set rc_versions_sorted = rc_versions | sort | reverse -%}
+        {%- set rc_base = rc_versions_sorted | first | split(pat="-") | first -%}
+{{ "\n" }}- `{{ rc_base }}` Release Candidates - {% for version in rc_versions_sorted -%}
+[{{ version }}](#{{ version | replace(from=".", to="") | replace(from="-", to="") | lower }})
+        {%- if not loop.last %} | {% endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+
+    {#- OUTPUT: Beta versions -#}
+    {%- if beta_versions | length > 0 -%}
+        {%- set beta_versions_sorted = beta_versions | sort | reverse -%}
+        {%- set beta_base = beta_versions_sorted | first | split(pat="-") | first -%}
+{{ "\n" }}- `{{ beta_base }}` Betas - {% for version in beta_versions_sorted -%}
+[{{ version }}](#{{ version | replace(from=".", to="") | replace(from="-", to="") | lower }})
+        {%- if not loop.last %} | {% endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+{%- endfor -%}{{ "\n" }}
+---
+"""
+
+body = """
+{%- macro remote_url() -%}
+  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro -%}
+
+{%- set_global renderable_commits = [] -%}
+{%- for commit in commits -%}
+    {# Filter commits that have a Conventional Commit type or a PR number (your rendering condition) #}
+    {%- if commit.conventional or commit.remote.pr_number -%}
+        {%- set_global renderable_commits = renderable_commits | concat(with=commit) -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{%- if renderable_commits | length > 0 -%} 
+    {#- LOGIC: Version Header with Link -#}
+    {%- if version -%}
+        {{ "\n" }}
+        ## [{{ version | trim_start_matches(pat="v") }}]({{ self::remote_url() }}/releases/tag/{{ version | trim_start_matches(pat="v") }})
+        {{ "\n" }}Released on {{ timestamp | date(format="%Y-%m-%d") }}. All issues associated with this milestone can be found using this [filter]({{ self::remote_url() }}/milestones?state=closed&q={{ version }}).
+    {%- else -%}
+        ## [Unreleased]
+    {%- endif -%}
+
+    {#- LOGIC: Loop through commit groups -#}
+    {%- for group, commits_in_group in renderable_commits | group_by(attribute="group") -%}
+        {%- if group == "Uncategorized Changes" and commits_in_group | length == 0 -%} 
+            {%- continue -%}
+        {%- endif -%}
+        
+        {# We also check that it is not the system group 'Other', which might be empty #}
+        {%- if group == "Other" and commits_in_group | length == 0 -%}
+             {%- continue -%}
+        {%- endif -%}
+
+        {%- set action_verb = "Contributed by" -%}
+        {%- if group == "Features" -%}
+            {%- set action_verb = "Implemented by" -%}
+        {%- elif group == "Bug Fixes" -%}
+            {%- set action_verb = "Fixed by" -%}
+        {%- elif group == "Performance" -%}
+            {%- set action_verb = "Optimized by" -%}
+        {%- elif group == "Documentation" -%}
+            {%- set action_verb = "Documented by" -%}
+        {%- endif -%}
+
+        {{ "\n" }}{{ "\n" }}### {{ group | upper_first }}
+        
+        {#- THE LOOP NOW USES FILTERED COMMITS AND DOESN'T NEED AN INNER IF -#}
+        {%- for commit in commits_in_group -%}
+            {%- set message = commit.message | split(pat="\n") | first | upper_first | trim -%}
+            
+            {#- VISUAL: Commit message line -#}
+            {{ "\n" }}- {{ message }}
+
+            {%- if commit.remote.username and commit.remote.pr_number -%}
+                {#- VISUAL: Dynamic verb line -#}
+                {{ "\n" }}  - {{ action_verb }} @{{ commit.remote.username }} in Pull Request [#{{ commit.remote.pr_number }}]({{ self::remote_url() }}/pull/{{ commit.remote.pr_number }}).
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endfor -%}
+
+    {#- LOGIC: New Contributors Section -#}
+    {%- set new_contributors = github.contributors | filter(attribute="is_first_time", value=true) -%}
+
+    {%- if new_contributors | length > 0 -%}
+      {%- set_global real_new_contributors = [] -%}
+      {%- for contributor in new_contributors -%}
+            {#- IMPORTANT: Filtering out your login "ns-vasilev" and Renovate -#}
+            {%- set username_lower = contributor.username | default(value="") | lower | trim -%}
+            {%- if username_lower != "ns-vasilev" and username_lower != "renovate" -%} 
+                {%- set_global real_new_contributors = real_new_contributors | concat(with=contributor) -%}
+            {%- endif -%}
+      {%- endfor -%}
+
+      {%- if real_new_contributors | length > 0 -%}
+          {{ "\n" }}{{ "\n" }}### New Contributors
+          {%- for contributor in real_new_contributors -%}
+            {{ "\n" }}* @{{ contributor.username }} made their first contribution in{{ " " }}
+            {%- if contributor.pr_number -%}
+                [#{{ contributor.pr_number }}]({{ self::remote_url() }}/pull/{{ contributor.pr_number }})
+            {%- endif -%}
+          {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+{%- endif -%}
+"""
+
+footer = """
+{%- macro remote_url() -%}
+  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro -%}
+
+{{ "\n" }}
+{% for release in releases -%}
+    {% if release.version -%}
+        {% if release.previous.version -%}
+            [{{ release.version | trim_start_matches(pat="v") }}]: \
+                {{ self::remote_url() }}/compare/{{ release.previous.version }}..{{ release.version }}
+        {% endif -%}
+    {% else -%}
+        [unreleased]: {{ self::remote_url() }}/compare/{{ release.previous.version }}..HEAD
+    {% endif -%}
+{% endfor %}
+"""
+trim = true
+postprocessors = []
+
+[git]
+conventional_commits = true
+# SET TO false to include old (unconventional) commits
+filter_unconventional = false 
+split_commits = false
+commit_preprocessors = [
+    { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "" },
+]
+commit_parsers = [
+    { message = "^feat", group = "Features" },
+    { message = "^fix", group = "Bug Fixes" },
+    { message = "^doc", group = "Documentation" },
+    { message = "^perf", group = "Performance" },
+    { message = "^refactor", group = "Refactor" },
+    { message = "^style", group = "Styling" },
+    { message = "^test", group = "Testing" },
+    { message = "^chore\\(spm.*\\)", skip = false },
+    { message = "^chore\\(deps.*\\)", skip = true },
+    { message = "^chore\\(pr\\)", skip = true },
+    { message = "^chore\\(pull\\)", skip = true },
+    { message = "^chore\\(release\\): prepare for", skip = true },
+    { message = "^chore|^ci", group = "Miscellaneous Tasks" },
+    { body = ".*security", group = "Security" },
+    # CATCH-ALL PARSER for old (unconventional) commits
+    { message = ".*", group = "Uncategorized Changes" }, 
+]
+
+# SET TO false to avoid filtering out Uncategorized Changes
+filter_commits = false 
+protect_breaking_commits = false
+tag_pattern = "^[0-9].*"
+skip_tags = "beta|alpha|cli-.*"
+ignore_tags = "rc|web-.*"
+topo_order = false
+sort_commits = "newest"
+
+[bump]
+breaking_always_bump_major = true
+features_always_bump_minor = true
+initial_tag = "0.1.0"
