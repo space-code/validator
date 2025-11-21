@@ -232,6 +232,9 @@ commit_preprocessors = [
     { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "" },
 ]
 commit_parsers = [
+    { message = "^chore\\(changelog\\)", skip = true },
+    { message = "^chore.*changelog", skip = true },
+    { message = "^docs: update CHANGELOG\\.md \\[skip ci\\]$", skip = true },
     { message = "^feat", group = "Features" },
     { message = "^fix", group = "Bug Fixes" },
     { message = "^doc", group = "Documentation" },
