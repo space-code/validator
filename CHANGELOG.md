@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix conventional commit script execution in GitHub Actions
   - Fixed by @ns-vasilev in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
+### Documentation
+- Update CHANGELOG.md [skip ci]
+
+### Features
+- Add release workflow for GitHub Actions
+  - Implemented by @ns-vasilev in Pull Request [#32](https://github.com/space-code/validator/pull/32).
+
 ### Miscellaneous Tasks
 - Update `changelog.yml`
   - Contributed by @ns-vasilev in Pull Request [#36](https://github.com/space-code/validator/pull/36).
