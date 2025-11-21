@@ -6,7 +6,29 @@ All notable changes to this project will be documented in this file.
 - `1.1.x` Releases - [1.1.0](#110)
 - `1.0.x` Releases - [1.0.0](#100) | [1.0.1](#101)
 
-## [1.1.0](https://github.com/space-code/validator/releases/tag/1.2.0)
+## [Unreleased]
+
+#### Added
+- Add `dependabot.yml`
+  - Added in Pull Request [#21](https://github.com/space-code/validator/pull/21).
+- Add `URLValidationRule`.
+  - Added in Pull Request [#25](https://github.com/space-code/validator/pull/25).
+- Add `CreditCardValidationRule`.
+  - Added in Pull Request [#26](https://github.com/space-code/validator/pull/26).
+- Add `conventional-pr.yml` for PR validation.
+  - Added in Pull Request [#27](https://github.com/space-code/validator/pull/27).
+
+#### Updated
+- Update `Mintfile`
+  - Updated in Pull Request [#22](https://github.com/space-code/validator/pull/22).
+- Update `dependabot.yml`
+  - Updated in Pull Request [#28](https://github.com/space-code/validator/pull/28).
+
+#### Fixed
+- Fix conventional commit script execution in GitHub Actions
+  - Fixed in Pull Request [#29](https://github.com/space-code/validator/pull/29).
+
+## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
 Released on 2025-11-13.
 
 #### Updated
