@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Add GitHub issue and PR templates
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#52](https://github.com/space-code/validator/pull/52).
 - Delete dependabot
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#51](https://github.com/space-code/validator/pull/51).
 - Rename actions
