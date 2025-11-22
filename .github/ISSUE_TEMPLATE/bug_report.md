@@ -1,41 +1,60 @@
 ---
-name: "🐛 Bug Report"
-about: Report a reproducible bug or regression.
-title: 'Bug: '
-labels: 'bug'
+name: 🐛 Bug Report
+about: Report a bug to help us improve
+title: '[BUG] '
+labels: bug, needs-triage
+assignees: ''
+---
+
+## Bug Description
+
+<!-- A clear and concise description of what the bug is -->
+
+## Steps to Reproduce
+
+<!-- Provide detailed steps to reproduce the behavior -->
+
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See error
+
+## Expected Behavior
+
+<!-- What you expected to happen -->
+
+## Actual Behavior
+
+<!-- What actually happened -->
+
+## Screenshots / Logs
+
+<!-- If applicable, add screenshots or error logs -->
+
+```
+<!-- Paste error logs here -->
+```
+
+## Environment
+
+<!-- Complete the following information -->
+
+- **OS**: [e.g., macOS 14.0, iOS 17.0, watchOS 9.0]
+- **Version**: [e.g., 1.2.3]
+
+## Additional Context
+
+<!-- Add any other context about the problem here -->
+
+## Possible Solution
+
+<!-- Optional: suggest a fix or reason for the bug -->
+
+## Related Issues
+
+<!-- Link to related issues if any -->
 
 ---
 
-<!--
-  Please provide a clear and concise description of what the bug is. Include
-  screenshots if needed. Please test using the latest version of the relevant
-  React packages to make sure your issue has not already been fixed.
--->
-
-Application version:
-
-## Steps To Reproduce
-
-1.
-2.
-
-<!--
-  Your bug will get fixed much faster if we can run your code and it doesn't
-  have dependencies other than React. Issues without reproduction steps or
-  code examples may be immediately closed as not actionable.
--->
-
-Link to code example:
-
-<!--
-  Please provide a CodeSandbox (https://codesandbox.io/s/new), a link to a
-  repository on GitHub, or provide a minimal code example that reproduces the
-  problem. You may provide a screenshot of the application if you think it is
-  relevant to your bug report. Here are some tips for providing a minimal
-  example: https://stackoverflow.com/help/mcve.
--->
-
-## The current behavior
-
-
-## The expected behavior
+**Priority**: <!-- Low / Medium / High / Critical -->
+**Impact**: <!-- How many users are affected? -->
