@@ -74,7 +74,7 @@ public struct ValidationViewModifier<T, ErrorView: View>: ViewModifier {
             content
                 .validation($item, rules: rules) { result in
                     DispatchQueue.main.async {
-                        self.validationResult = result
+                        validationResult = result
                     }
                 }
             validationMessageView
@@ -86,9 +86,9 @@ public struct ValidationViewModifier<T, ErrorView: View>: ViewModifier {
     private var validationMessageView: some View {
         switch validationResult {
         case .valid:
-            return EmptyView().eraseToAnyView()
+            EmptyView().eraseToAnyView()
         case let .invalid(errors):
-            return content(errors).eraseToAnyView()
+            content(errors).eraseToAnyView()
         }
     }
 }

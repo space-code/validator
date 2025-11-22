@@ -35,7 +35,7 @@ public struct FormValidationViewModifier<ErrorView: View>: ViewModifier {
             content
             validationMessageView
         }.onReceive(validationContainer.publisher) { result in
-            self.validationResult = result
+            validationResult = result
         }
     }
 
@@ -44,9 +44,9 @@ public struct FormValidationViewModifier<ErrorView: View>: ViewModifier {
     private var validationMessageView: some View {
         switch validationResult {
         case .valid:
-            return EmptyView().eraseToAnyView()
+            EmptyView().eraseToAnyView()
         case let .invalid(errors):
-            return content(errors).eraseToAnyView()
+            content(errors).eraseToAnyView()
         }
     }
 }

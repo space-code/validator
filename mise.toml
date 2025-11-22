@@ -1,8 +1,10 @@
 [tools]
 git-cliff = "2.9.1"
-
-[hooks]
-postinstall = "mise run install"
+swiftlint = "0.62.2"
+swiftformat = "0.58.6"
 
 [settings]
 experimental = true
+
+[hooks]
+postinstall = "mise run install"

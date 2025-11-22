@@ -15,8 +15,8 @@ public typealias ValidationPublisher = AnyPublisher<ValidationResult, Never>
 public final class FormField<Value>: IFormField {
     // MARK: Properties
 
-    @Published
     /// The value to validate.
+    @Published
     private var value: Value
 
     /// The validation.

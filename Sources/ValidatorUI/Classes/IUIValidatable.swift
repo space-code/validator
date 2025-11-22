@@ -21,7 +21,7 @@ public protocol IUIValidatable: AnyObject {
     ///   - rule: The validation rule.
     ///
     /// - Returns: A validation result.
-    func validate<T>(rule: some IValidationRule<T>) -> ValidationResult where T == Input
+    func validate(rule: some IValidationRule<Input>) -> ValidationResult
 
     /// Validates an input value.
     ///
