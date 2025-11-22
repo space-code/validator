@@ -40,10 +40,10 @@ final class CreditCardValidationRuleTests: XCTestCase {
     func test_validate_masterCardValid_shouldReturnTrue() {
         // given
         let rule = CreditCardValidationRule(types: [.masterCard], error: String.error)
-        let validMaster = "5500000000000004"
+        let validMasterCard = "5500000000000004"
 
         // when
-        let isValid = rule.validate(input: validMaster)
+        let isValid = rule.validate(input: validMasterCard)
 
         // then
         XCTAssertTrue(isValid)
@@ -52,10 +52,10 @@ final class CreditCardValidationRuleTests: XCTestCase {
     func test_validate_masterCardInvalid_shouldReturnFalse() {
         // given
         let rule = CreditCardValidationRule(types: [.masterCard], error: String.error)
-        let invalidMaster = "550000000000"
+        let invalidMasterCard = "550000000000"
 
         // when
-        let isValid = rule.validate(input: invalidMaster)
+        let isValid = rule.validate(input: invalidMasterCard)
 
         // then
         XCTAssertFalse(isValid)

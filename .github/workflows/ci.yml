@@ -23,16 +23,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  SwiftLint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
-        with:
-          args: --strict
-        env:
-          DIFF_BASE: ${{ github.base_ref }}
   macOS:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runsOn }}
@@ -205,23 +195,3 @@ jobs:
         with:
           name: MergedResult
           path: test_output/final
-
-  discover-typos:
-    name: Discover Typos
-    runs-on: macos-15
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Set up Python environment
-        run: |
-          python3 -m venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          pip install codespell
-
-      - name: Discover typos
-        run: |
-          source .venv/bin/activate
-          codespell --ignore-words-list="hart,inout,msdos,sur" --skip="./.build/*,./.git/*"

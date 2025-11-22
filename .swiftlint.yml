@@ -1,5 +1,4 @@
 excluded:
-  - Tests
   - Package.swift
   - Package@swift-5.10.swift
   - Package@swift-6.0.swift
@@ -12,9 +11,9 @@ disabled_rules:
   - trailing_comma
   - todo
   - opening_brace
+  - statement_position
 
 opt_in_rules: # some rules are only opt-in
-  - anyobject_protocol
   - array_init
   - closure_body_length
   - closure_end_indentation
@@ -43,7 +42,6 @@ opt_in_rules: # some rules are only opt-in
   - ibinspectable_in_extension
   - identical_operands
   - implicit_return
-  - inert_defer
   - joined_default_parameter
   - last_where
   - legacy_multiple

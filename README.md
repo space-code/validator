@@ -259,7 +259,7 @@ dependencies: [
 Bootstrapping development environment
 
 ```
-make bootstrap
+mise install
 ```
 
 Please feel free to help out with this project! If you see something that could be made better or want a new feature, open up an issue or send a Pull Request!

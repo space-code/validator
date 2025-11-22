@@ -1,6 +1,6 @@
 # Stream rules
 
---swiftversion 6.2
+--swiftversion 5.10
 
 # Use 'swiftformat --options' to list all of the possible options
 
