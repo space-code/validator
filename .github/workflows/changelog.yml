@@ -40,6 +40,7 @@ jobs:
         if: steps.changelog-changes.outputs.has-changes == 'true'
         with:
           commit_message: "chore(changelog): update CHANGELOG.md"
+          commit_options: '--no-verify'
           file_pattern: CHANGELOG.md
           commit_user_name: github-actions[bot]
           commit_user_email: github-actions[bot]@users.noreply.github.com
