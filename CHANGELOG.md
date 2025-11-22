@@ -15,53 +15,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Bug Fixes
 - Fix changelog configuration
-  - Fixed by @ns-vasilev in Pull Request [#35](https://github.com/space-code/validator/pull/35).
+  - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#35](https://github.com/space-code/validator/pull/35).
 - Fix conventional commit script execution in GitHub Actions
-  - Fixed by @ns-vasilev in Pull Request [#29](https://github.com/space-code/validator/pull/29).
+  - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
 ### Features
 - Add CODEOWNERS file for automatic code review assignments
-  - Implemented by @ns-vasilev in Pull Request [#49](https://github.com/space-code/validator/pull/49).
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#49](https://github.com/space-code/validator/pull/49).
 - Add release workflow for GitHub Actions
-  - Implemented by @ns-vasilev in Pull Request [#32](https://github.com/space-code/validator/pull/32).
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
 - Update config
-  - Contributed by @ns-vasilev in Pull Request [#46](https://github.com/space-code/validator/pull/46).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#46](https://github.com/space-code/validator/pull/46).
 - Add --no-verify flag to commit_options in GitHub Action
-  - Contributed by @ns-vasilev in Pull Request [#41](https://github.com/space-code/validator/pull/41).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#41](https://github.com/space-code/validator/pull/41).
 - Automate code formatting and linting with git hooks
-  - Contributed by @ns-vasilev in Pull Request [#39](https://github.com/space-code/validator/pull/39).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#39](https://github.com/space-code/validator/pull/39).
 - Update workflow to run tests and build project
-  - Contributed by @ns-vasilev in Pull Request [#33](https://github.com/space-code/validator/pull/33).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#33](https://github.com/space-code/validator/pull/33).
 - Merge `dev` into `main`
-  - Contributed by @ns-vasilev in Pull Request [#31](https://github.com/space-code/validator/pull/31).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#31](https://github.com/space-code/validator/pull/31).
 - Update `dependabot.yml`
-  - Contributed by @ns-vasilev in Pull Request [#28](https://github.com/space-code/validator/pull/28).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#28](https://github.com/space-code/validator/pull/28).
 - Add `conventional-pr.yml` for PR validation
-  - Contributed by @ns-vasilev in Pull Request [#27](https://github.com/space-code/validator/pull/27).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#27](https://github.com/space-code/validator/pull/27).
 
 ### Refactor
 - Simplify CI workflow configuration
-  - Contributed by @ns-vasilev in Pull Request [#42](https://github.com/space-code/validator/pull/42).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#42](https://github.com/space-code/validator/pull/42).
 
 ### Uncategorized Changes
 - Add renovate.json
-  - Contributed by @renovate[bot] in Pull Request [#40](https://github.com/space-code/validator/pull/40).
+  - Contributed by [@renovate[bot]](https://github.com/renovate[bot]) in Pull Request [#40](https://github.com/space-code/validator/pull/40).
 - Add `CreditCardValidationRule` implementation
-  - Contributed by @ns-vasilev in Pull Request [#26](https://github.com/space-code/validator/pull/26).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#26](https://github.com/space-code/validator/pull/26).
 - Add `URLValidationRule` implementation
-  - Contributed by @ns-vasilev in Pull Request [#25](https://github.com/space-code/validator/pull/25).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#25](https://github.com/space-code/validator/pull/25).
 - Update `Mintfile`
-  - Contributed by @ns-vasilev in Pull Request [#24](https://github.com/space-code/validator/pull/24).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#24](https://github.com/space-code/validator/pull/24).
 - Bump actions/checkout from 2 to 5
-  - Contributed by @dependabot[bot] in Pull Request [#22](https://github.com/space-code/validator/pull/22).
+  - Contributed by [@dependabot[bot]](https://github.com/dependabot[bot]) in Pull Request [#22](https://github.com/space-code/validator/pull/22).
 - Bump actions/upload-artifact from 4 to 5
-  - Contributed by @dependabot[bot] in Pull Request [#23](https://github.com/space-code/validator/pull/23).
+  - Contributed by [@dependabot[bot]](https://github.com/dependabot[bot]) in Pull Request [#23](https://github.com/space-code/validator/pull/23).
 - Add `dependabot.yml`
-  - Contributed by @ns-vasilev in Pull Request [#21](https://github.com/space-code/validator/pull/21).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#21](https://github.com/space-code/validator/pull/21).
 - Update `README.md`
-  - Contributed by @ns-vasilev in Pull Request [#20](https://github.com/space-code/validator/pull/20).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#20](https://github.com/space-code/validator/pull/20).
 
 ### New Contributors
 * @renovate[bot] made their first contribution in 
@@ -73,9 +73,9 @@ Released on 2025-11-14. All issues associated with this milestone can be found u
 
 ### Uncategorized Changes
 - Add support for Swift 6.2
-  - Contributed by @ns-vasilev in Pull Request [#19](https://github.com/space-code/validator/pull/19).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#19](https://github.com/space-code/validator/pull/19).
 - Add support for Swift 6.2
-  - Contributed by @ns-vasilev in Pull Request [#18](https://github.com/space-code/validator/pull/18).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#18](https://github.com/space-code/validator/pull/18).
 
 ## [1.1.0](https://github.com/space-code/validator/releases/tag/1.1.0)
 
@@ -83,15 +83,15 @@ Released on 2024-12-24. All issues associated with this milestone can be found u
 
 ### Uncategorized Changes
 - Release `1.1.0`
-  - Contributed by @ns-vasilev in Pull Request [#16](https://github.com/space-code/validator/pull/16).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#16](https://github.com/space-code/validator/pull/16).
 - Update `README.md`
-  - Contributed by @ns-vasilev in Pull Request [#17](https://github.com/space-code/validator/pull/17).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#17](https://github.com/space-code/validator/pull/17).
 - Update gem dependencies
-  - Contributed by @ns-vasilev in Pull Request [#15](https://github.com/space-code/validator/pull/15).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#15](https://github.com/space-code/validator/pull/15).
 - Update `CHANGELOG.md`
-  - Contributed by @ns-vasilev in Pull Request [#14](https://github.com/space-code/validator/pull/14).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#14](https://github.com/space-code/validator/pull/14).
 - Increase the `Swift` version to 6.0
-  - Contributed by @ns-vasilev in Pull Request [#13](https://github.com/space-code/validator/pull/13).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#13](https://github.com/space-code/validator/pull/13).
 
 ## [1.0.1](https://github.com/space-code/validator/releases/tag/1.0.1)
 
@@ -99,9 +99,9 @@ Released on 2024-01-10. All issues associated with this milestone can be found u
 
 ### Uncategorized Changes
 - Release `1.0.1`
-  - Contributed by @ns-vasilev in Pull Request [#11](https://github.com/space-code/validator/pull/11).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#11](https://github.com/space-code/validator/pull/11).
 - Update `CHANGELOG.md`
-  - Contributed by @ns-vasilev in Pull Request [#12](https://github.com/space-code/validator/pull/12).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#12](https://github.com/space-code/validator/pull/12).
 
 ## [1.0.0](https://github.com/space-code/validator/releases/tag/1.0.0)
 
@@ -109,11 +109,11 @@ Released on 2023-10-09. All issues associated with this milestone can be found u
 
 ### Uncategorized Changes
 - Update `CHANGELOG.md`
-  - Contributed by @ns-vasilev in Pull Request [#4](https://github.com/space-code/validator/pull/4).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#4](https://github.com/space-code/validator/pull/4).
 - Update `CHANGELOG.md`
-  - Contributed by @ns-vasilev in Pull Request [#3](https://github.com/space-code/validator/pull/3).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#3](https://github.com/space-code/validator/pull/3).
 - Implement `Validator` package
-  - Contributed by @ns-vasilev in Pull Request [#1](https://github.com/space-code/validator/pull/1).
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#1](https://github.com/space-code/validator/pull/1).
 
 [unreleased]: https://github.com/space-code/validator/compare/1.2.0..HEAD
 [1.2.0]: https://github.com/space-code/validator/compare/1.1.0..1.2.0
