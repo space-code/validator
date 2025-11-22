@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contributed by @ns-vasilev in Pull Request [#27](https://github.com/space-code/validator/pull/27).
 
 ### Uncategorized Changes
+- Add renovate.json
+  - Contributed by @renovate[bot] in Pull Request [#40](https://github.com/space-code/validator/pull/40).
 - Add `CreditCardValidationRule` implementation
   - Contributed by @ns-vasilev in Pull Request [#26](https://github.com/space-code/validator/pull/26).
 - Add `URLValidationRule` implementation
@@ -54,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contributed by @ns-vasilev in Pull Request [#20](https://github.com/space-code/validator/pull/20).
 
 ### New Contributors
+* @renovate[bot] made their first contribution in [#40](https://github.com/space-code/validator/pull/40)
 * @dependabot[bot] made their first contribution in [#22](https://github.com/space-code/validator/pull/22)
 
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
