@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix conventional commit script execution in GitHub Actions
   - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
+### Documentation
+- Update project structure
+  - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
+
 ### Features
 - Add CODEOWNERS file for automatic code review assignments
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#49](https://github.com/space-code/validator/pull/49).
