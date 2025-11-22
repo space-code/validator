@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contributed by @ns-vasilev in Pull Request [#20](https://github.com/space-code/validator/pull/20).
 
 ### New Contributors
-* @renovate[bot] made their first contribution in 
+* @renovate[bot] made their first contribution in [#47](https://github.com/space-code/validator/pull/47)
 * @dependabot[bot] made their first contribution in [#22](https://github.com/space-code/validator/pull/22)
 
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
