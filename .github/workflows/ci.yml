@@ -8,14 +8,14 @@ on:
       - '.swiftlint.yml'
       - ".github/workflows/**"
       - "Package.swift"
-      - "Source/**"
+      - "Sources/**"
       - "Tests/**"
   pull_request:
     paths:
       - '.swiftlint.yml'
       - ".github/workflows/**"
       - "Package.swift"
-      - "Source/**"
+      - "Sources/**"
       - "Tests/**"
 
 concurrency:
