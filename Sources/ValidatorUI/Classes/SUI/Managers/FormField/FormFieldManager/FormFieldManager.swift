@@ -10,8 +10,9 @@ import ValidatorCore
 public final class FormFieldManager: IFormFieldManager {
     // MARK: Properties
 
-    @Published public var isValid = true
+    @Published public var isValid = false
 
+    private var cancellables = Set<AnyCancellable>()
     private var validators: [any IFormValidationContainer] = []
 
     // MARK: Initialization
@@ -21,6 +22,14 @@ public final class FormFieldManager: IFormFieldManager {
     // MARK: IFormFieldManager
 
     public func append(validator: some IFormValidationContainer) {
+        validator
+            .publisher
+            .sink(receiveValue: { [weak self] _ in
+                self?.validate()
+            }
+            )
+            .store(in: &cancellables)
+
         validators.append(validator)
         validate()
     }
