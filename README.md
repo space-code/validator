@@ -1,4 +1,4 @@
-![Validator: is a framework written in Swift that provides functions that can be used to validate the contents of an input value.](https://raw.githubusercontent.com/space-code/validator/dev/Resources/validator.png)
+![A powerful, type-safe validation framework for Swift](https://raw.githubusercontent.com/space-code/validator/main/Resources/validator.png)
 
 <h1 align="center" style="margin-top: 0px;">validator</h1>
 
@@ -12,46 +12,117 @@
 </p>
 
 ## Description
-Validator is a framework written in Swift that provides functions that can be used to validate the contents of an input value.
+Validator is a modern, lightweight Swift framework that provides elegant and type-safe input validation. Built with Swift's powerful type system, it seamlessly integrates with both UIKit and SwiftUI, making form validation effortless across all Apple platforms.
 
-- [Usage](#usage)
-- [Validation Rules](#validation-rules)
-- [Custom Validation Rules](#custom-validation-rules)
+## Features
+
+✨ **Type-Safe Validation** - Leverages Swift's type system for compile-time safety  
+🎯 **Rich Rule Set** - Built-in validators for common use cases  
+🔧 **Extensible** - Easy to create custom validation rules  
+📱 **UIKit Integration** - First-class support for UITextField and other UIKit components  
+🎨 **SwiftUI Native** - Property wrappers and view modifiers for declarative validation  
+📋 **Form Management** - Validate multiple fields with centralized state management  
+⚡ **Lightweight** - Minimal footprint with zero dependencies  
+🧪 **Well Tested** - Comprehensive test coverage  
+
+## Table of Contents
+
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Communication](#communication)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+  - [Core Validation](#core-validation)
+  - [UIKit Integration](#uikit-integration)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [Form Validation](#form-validation)
+- [Built-in Validators](#built-in-validators)
+- [Custom Validators](#custom-validators)
 - [Contributing](#contributing)
-- [Author](#author)
 - [License](#license)
+
+## Requirements
+
+| Platform  | Minimum Version |
+|-----------|----------------|
+| iOS       | 16.0+          |
+| macOS     | 13.0+          |
+| tvOS      | 16.0+          |
+| watchOS   | 9.0+           |
+| visionOS  | 1.0+           |
+| Xcode     | 15.3+          |
+| Swift     | 5.10+          |
 
 ## Usage
 
 The package contains two libraries: `ValidatorCore` encompasses all validation logic and predefined validators, while `ValidatorUI` implements extensions for integrating the validator into UI objects. It supports both `SwiftUI` and `UIKit`.
 
-### Basic usage
+## Installation
 
-If you need to validate some data, you can use the `Validator` object for this purpose as follows:
+### Swift Package Manager
+
+Add the following dependency to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/space-code/validator.git", from: "1.2.0")
+]
+```
+
+Or add it through Xcode:
+
+1. File > Add Package Dependencies
+2. Enter package URL: `https://github.com/space-code/validator.git`
+3. Select version requirements
+
+## Quick Start
 
 ```swift
 import ValidatorCore
 
 let validator = Validator()
-let result = validator.validate(input: "text", rule: LengthValidationRule(min: 4, error: "Text must be at least 4 characters long"))
+let result = validator.validate(
+    input: "user@example.com",
+    rule: RegexValidationRule(
+        pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+        error: "Invalid email address"
+    )
+)
 
 switch result {
 case .valid:
-    print("Text is valid")
-case let .invalid(errors):
-    // handle validation errors
-    print("Validation errors: \(errors.map(\.message))")
+    print("✅ Valid input")
+case .invalid(let errors):
+    print("❌ Validation failed: \(errors.map(\.message))")
 }
 ```
 
-### UIKit
+## Usage
 
-If you want to validate a user's input data, you can import `ValidatorUI` and integrate validation logic into UI components. Your UI object must conform to `IUIValidatable` prototocol that requires to define an `inputValue` and `validateOnInputChange(_:)` method.
+The framework provides two main libraries:
 
-`ValidatorUI` supports an extension for convenient integration of the validator into `UITextField` objects:
+- **ValidatorCore** - Core validation logic and predefined validators
+- **ValidatorUI** - UI integration for UIKit and SwiftUI
+
+### Core Validation
+
+Validate any input with the `Validator` class:
+
+```swift
+import ValidatorCore
+
+let validator = Validator()
+let result = validator.validate(
+    input: "password123",
+    rule: LengthValidationRule(
+        min: 8,
+        error: "Password must be at least 8 characters"
+    )
+)
+```
+
+### UIKit Integration
+
+Import `ValidatorUI` to add validation to UIKit components:
 
 ```swift
 import UIKit
@@ -59,213 +130,307 @@ import ValidatorUI
 import ValidatorCore
 
 class ViewController: UIViewController {
-
-    let textField: UITextField = UITextField()
-
+    let emailField = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// Adds validation rule to the text field.
-        textField.add(rule: LengthValidationRule(max: 10, error: "Text must be at most 10 characters"))
-        /// Enables automatic validation on input change.
-        textField.validateOnInputChange(isEnabled: true)
-        /// Handle the validation result.
-        textField.validationHandler = { result in
+        // Add validation rules
+        emailField.add(
+            rule: RegexValidationRule(
+                pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+                error: "Please enter a valid email"
+            )
+        )
+        
+        // Enable real-time validation
+        emailField.validateOnInputChange(isEnabled: true)
+        
+        // Handle validation results
+        emailField.validationHandler = { result in
             switch result {
             case .valid:
-                print("Text is valid")
-            case let .invalid(errors):
-                print("Validation errors: \(errors)")
+                self.updateUI(isValid: true)
+            case .invalid(let errors):
+                self.showErrors(errors)
             }
         }
     }
-
-    /// Setup UITextField ...
 }
 ```
 
-### SwiftUI
+### SwiftUI Integration
 
-If you need to validate a single field, you can use the validation view extension and handle the validation result in a validation handler:
+#### Single Field Validation
+
+Use the `.validation()` modifier for simple field validation:
 
 ```swift
 import SwiftUI
 import ValidatorUI
 import ValidatorCore
 
-struct ContentView: View {
-    @State private var text: String = ""
-    
-    private let validationRules: [any IValidationRule<String>] = [
-        LengthValidationRule(max: 10, error: "Text error")
-    ]
+struct LoginView: View {
+    @State private var email = ""
     
     var body: some View {
-        VStack {
-            TextField("Text", text: $text)
-                .validation($text, rules: validationRules) { result in
-                    // Handle a validation result here
-                }
-        }
-    }
-}
-```
-
-You can also use a view modifier where you can pass an error view:
-
-```swift
-import SwiftUI
-import ValidatorUI
-import ValidatorCore
-
-struct ContentView: View {
-    @State private var text: String = ""
-    
-    private let validationRules: [any IValidationRule<String>] = [
-        LengthValidationRule(max: 10, error: "Text must be at most 10 characters")
-    ]
-    
-    var body: some View {
-        VStack {
-            TextField("Enter text", text: $text)
-                .validate(item: $text, rules: validationRules) { errors in
-                    Text("Text exceeds 10 characters")
-                }
-        }
-    }
-}
-```
-
-### SwiftUI Forms
-
-`ValidatorUI` supports form validation. If your screen contains a number of input fields and you want to handle validation results in one place, you can use a validation form manager as follows:
-
-```swift
-import SwiftUI
-import ValidatorUI
-import ValidatorCore
-
-class Form: ObservableObject {
-    @Published
-    var manager = FormFieldManager()
-
-    @FormField(rules: [LengthValidationRule(max: 20, error: "First name is too long")])
-    var firstName: String = ""
-
-    @FormField(rules: [LengthValidationRule(min: 5, error: "Last name is too short")])
-    var lastName: String = ""
-    
-    lazy var firstNameValidationContainer = _firstName.validate(manager: manager)
-    lazy var lastNameValidationContainer = _lastName.validate(manager: manager)
-}
-
-struct ContentView: View {
-    @ObservedObject private var form = Form()
-
-    var body: some View {
-        VStack {
-            TextField("First Name", text: $form.firstName)
-                .validate(validationContainer: form.firstNameValidationContainer) { errors in
-                    Text(errors.map { $0.message }.joined(separator: " "))
-                }
-            TextField("Last Name", text: $form.lastName)
-                .validate(validationContainer: form.lastNameValidationContainer) { errors in
-                    Text(errors.map { $0.message }.joined(separator: " "))
-                }
-            Button(action: { self.form.manager.validate() }, label: { Text("Validate") })
-
-            Spacer()
-        }
-        .onReceive(
-            form.manager.$isValid,
-            perform: { value in
-                if value {
-                    print("All form fields are valid")
-                } else {
-                    print("Some form fields are invalid")
+        TextField("Email", text: $email)
+            .validation($email, rules: [
+                RegexValidationRule(
+                    pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+                    error: "Invalid email"
+                )
+            ]) { result in
+                if case .invalid(let errors) = result {
+                    print("Validation errors: \(errors)")
                 }
             }
+    }
+}
+```
+
+Or use `.validate()` with a custom error view:
+
+```swift
+struct LoginView: View {
+    @State private var password = ""
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            SecureField("Password", text: $password)
+                .validate(item: $password, rules: [
+                    LengthValidationRule(min: 8, error: "Too short")
+                ]) { errors in
+                    ForEach(errors, id: \.message) { error in
+                        Text(error.message)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
+                }
+        }
+    }
+}
+```
+
+### Form Validation
+
+Manage multiple fields with `FormFieldManager`:
+
+```swift
+import Combine
+import SwiftUI
+import ValidatorUI
+import ValidatorCore
+
+class RegistrationForm: ObservableObject {
+    @Published var manager = FormFieldManager()
+    
+    @FormField(rules: [
+        LengthValidationRule(min: 2, max: 50, error: "Invalid name length")
+    ])
+    var firstName = ""
+    
+    @FormField(rules: [
+        LengthValidationRule(min: 2, max: 50, error: "Invalid name length")
+    ])
+    var lastName = ""
+    
+    @FormField(rules: [
+        RegexValidationRule(
+            pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+            error: "Invalid email"
         )
+    ])
+    var email = ""
+    
+    lazy var firstNameContainer = _firstName.validate(manager: manager)
+    lazy var lastNameContainer = _lastName.validate(manager: manager)
+    lazy var emailContainer = _email.validate(manager: manager)
+}
+
+struct RegistrationView: View {
+    @StateObject private var form = RegistrationForm()
+    @State private var isFormValid = false
+
+    var body: some View {
+        Form {
+            Section("Personal Information") {
+                TextField("First Name", text: $form.firstName)
+                    .validate(validationContainer: form.firstNameContainer) { errors in
+                        ErrorView(errors: errors)
+                    }
+                
+                TextField("Last Name", text: $form.lastName)
+                    .validate(validationContainer: form.lastNameContainer) { errors in
+                        ErrorView(errors: errors)
+                    }
+            }
+            
+            Section("Contact") {
+                TextField("Email", text: $form.email)
+                    .validate(validationContainer: form.emailContainer) { errors in
+                        ErrorView(errors: errors)
+                    }
+            }
+            
+            Section {
+                Button("Submit") {
+                    form.manager.validate()
+                }
+                .disabled(!isFormValid)
+            }
+        }
+        .onReceive(form.manager.$isValid) { newValue in
+            isFormValid = newValue
+        }
+    }
+    
+    private func submitForm() {
+        print("✅ Form is valid, submitting...")
     }
 }
 ```
 
-## Validation Rules
+## Built-in Validators
 
-| **Validator**              | **Description**                                                                     |
-|----------------------------|-------------------------------------------------------------------------------------|
-| **LengthValidationRule**   | To validate whether a string is matching a specific length                          |
-| **NonEmptyValidationRule** | To validate whether a string is empty or blank                                      |
-| **PrefixValidationRule**   | To validate whether a string contains a prefix                                      |
-| **SuffixValidationRule**   | To validate whether a string contains a suffix                                      |
-| **RegexValidationRule**    | To validate if a pattern is matched                                                 |
-| **URLValidationRule**      | To validate whether a string contains a URL                                         |
-| **CreditCardValidationRule** | To validate whether a string has a valid credit card number                       |
+| Validator | Description | Example |
+|-----------|-------------|---------|
+| `LengthValidationRule` | Validates string length (min/max) | `LengthValidationRule(min: 3, max: 20, error: "Length must be 3-20 characters")` |
+| `NonEmptyValidationRule` | Ensures string is not empty or blank | `NonEmptyValidationRule(error: "Field is required")` |
+| `PrefixValidationRule` | Validates string prefix | `PrefixValidationRule(prefix: "https://", error: "URL must start with https://")` |
+| `SuffixValidationRule` | Validates string suffix | `SuffixValidationRule(suffix: ".com", error: "Domain must end with .com")` |
+| `RegexValidationRule` | Pattern matching validation | `RegexValidationRule(pattern: "^\\d{3}-\\d{4}$", error: "Invalid phone format")` |
+| `URLValidationRule` | Validates URL format | `URLValidationRule(error: "Please enter a valid URL")` |
+| `CreditCardValidationRule` | Validates credit card numbers (Luhn algorithm) | `CreditCardValidationRule(error: "Invalid card number")` |
 
-## Custom Validation Rules
+## Custom Validators
 
-To implement a custom validation rule, you can conform to the `IValidationRule` protocol, which requires defining a validation type and implementing validation logic. For example:
+Create custom validation rules by conforming to `IValidationRule`:
 
 ```swift
-/// A non empty validation rule.
-public struct NonEmptyValidationRule: IValidationRule {
-    // MARK: Types
+import ValidatorCore
 
-    public typealias Input = String
-
-    // MARK: Properties
-
-    /// The validation error.
-    public let error: IValidationError
-
-    // MARK: Initialization
-
-    public init(error: IValidationError) {
+struct EmailDomainValidationRule: IValidationRule {
+    typealias Input = String
+    
+    let allowedDomains: [String]
+    let error: IValidationError
+    
+    init(allowedDomains: [String], error: IValidationError) {
+        self.allowedDomains = allowedDomains
         self.error = error
     }
-
-    // MARK: IValidationRule
-
-    public func validate(input: String) -> Bool {
-        !input.isEmpty
+    
+    func validate(input: String) -> Bool {
+        guard let domain = input.split(separator: "@").last else {
+            return false
+        }
+        return allowedDomains.contains(String(domain))
     }
 }
+
+// Usage
+let rule = EmailDomainValidationRule(
+    allowedDomains: ["company.com", "company.org"],
+    error: "Only company email addresses are allowed"
+)
 ```
 
-## Requirements
-- iOS 16.0+ / macOS 13+ / tvOS 16.0+ / watchOS 9.0+
-- Xcode 15.3
-- Swift 5.10
+### Composing Validators
 
-## Installation
-### Swift Package Manager
-
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but `validator` does support its use on supported platforms.
-
-Once you have your Swift package set up, adding `validator` as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Combine multiple validators for complex validation logic:
 
 ```swift
-dependencies: [
-    .package(url: "https://github.com/space-code/validator.git", .upToNextMajor(from: "1.2.0"))
-]
+// Define reusable validation rules
+let lengthRule = LengthValidationRule(
+    min: 8,
+    max: 128,
+    error: "Password must be 8-128 characters"
+)
+
+let uppercaseRule = RegexValidationRule(
+    pattern: ".*[A-Z].*",
+    error: "Must contain uppercase letter"
+)
+
+let lowercaseRule = RegexValidationRule(
+    pattern: ".*[a-z].*",
+    error: "Must contain lowercase letter"
+)
+
+let numberRule = RegexValidationRule(
+    pattern: ".*[0-9].*",
+    error: "Must contain number"
+)
+
+let specialCharRule = RegexValidationRule(
+    pattern: ".*[!@#$%^&*(),.?\":{}|<>].*",
+    error: "Must contain special character"
+)
+
+// UIKit: Pass all rules to your text field
+passwordField.add(rules: [
+    lengthRule,
+    uppercaseRule,
+    lowercaseRule,
+    numberRule,
+    specialCharRule
+])
+
+// SwiftUI: Use in validation modifier
+SecureField("Password", text: $password)
+    .validation($password, rules: [
+        lengthRule,
+        uppercaseRule,
+        lowercaseRule,
+        numberRule,
+        specialCharRule
+    ]) { result in
+        if case .invalid(let errors) = result {
+            self.passwordErrors = errors
+        }
+    }
 ```
 
 ## Communication
-- If you **found a bug**, open an issue.
-- If you **have a feature request**, open an issue.
-- If you **want to contribute**, submit a pull request.
+
+- 🐛 **Found a bug?** [Open an issue](https://github.com/space-code/validator/issues/new?template=bug_report.md)
+- 💡 **Have a feature request?** [Open an issue](https://github.com/space-code/validator/issues/new?template=feature_request.md)
+- ❓ **Questions?** [Start a discussion](https://github.com/space-code/validator/discussions)
+- 🔒 **Security issue?** Email nv3212@gmail.com
 
 ## Contributing
-Bootstrapping development environment
 
-```
+We love contributions! Please read our [Contributing Guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes.
+
+### Development Setup
+
+Bootstrap the development environment:
+
+```bash
 mise install
 ```
 
-Please feel free to help out with this project! If you see something that could be made better or want a new feature, open up an issue or send a Pull Request!
+### Code of Conduct
+
+This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## Author
-Nikita Vasilev, nv3212@gmail.com
+
+**Nikita Vasilev**
+- Email: nv3212@gmail.com
+- GitHub: [@ns-vasilev](https://github.com/ns-vasilev)
 
 ## License
-validator is available under the MIT license. See the LICENSE file for more info.
+
+Validator is released under the MIT license. See [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+**[⬆ back to top](#validator)**
+
+Made with ❤️ by [space-code](https://github.com/space-code)
+
+</div>
