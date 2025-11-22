@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Bug Fixes
+- Update paths
+  - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#56](https://github.com/space-code/validator/pull/56).
 - Fix changelog configuration
   - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#35](https://github.com/space-code/validator/pull/35).
 - Fix conventional commit script execution in GitHub Actions
