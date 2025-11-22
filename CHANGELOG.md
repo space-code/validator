@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Delete dependabot
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#51](https://github.com/space-code/validator/pull/51).
+- Rename actions
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#50](https://github.com/space-code/validator/pull/50).
 - Update config
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#46](https://github.com/space-code/validator/pull/46).
 - Add --no-verify flag to commit_options in GitHub Action
