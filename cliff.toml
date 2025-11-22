@@ -172,7 +172,7 @@ body = """
 
             {%- if commit.remote.username and commit.remote.pr_number -%}
                 {#- VISUAL: Dynamic verb line -#}
-                {{ "\n" }}  - {{ action_verb }} @{{ commit.remote.username }} in Pull Request [#{{ commit.remote.pr_number }}]({{ self::remote_url() }}/pull/{{ commit.remote.pr_number }}).
+                {{ "\n" }}  - {{ action_verb }} [@{{ commit.remote.username }}](https://github.com/{{ commit.remote.username }}) in Pull Request [#{{ commit.remote.pr_number }}]({{ self::remote_url() }}/pull/{{ commit.remote.pr_number }}).
             {%- endif -%}
         {%- endfor -%}
     {%- endfor -%}
