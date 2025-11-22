@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by @ns-vasilev in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Add --no-verify flag to commit_options in GitHub Action
+  - Contributed by @ns-vasilev in Pull Request [#41](https://github.com/space-code/validator/pull/41).
+- Automate code formatting and linting with git hooks
+  - Contributed by @ns-vasilev in Pull Request [#39](https://github.com/space-code/validator/pull/39).
 - Update workflow to run tests and build project
   - Contributed by @ns-vasilev in Pull Request [#33](https://github.com/space-code/validator/pull/33).
 - Merge `dev` into `main`
