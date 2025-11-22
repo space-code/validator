@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed by @ns-vasilev in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
 ### Features
+- Add CODEOWNERS file for automatic code review assignments
+  - Implemented by @ns-vasilev in Pull Request [#49](https://github.com/space-code/validator/pull/49).
 - Add release workflow for GitHub Actions
   - Implemented by @ns-vasilev in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
@@ -62,7 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contributed by @ns-vasilev in Pull Request [#20](https://github.com/space-code/validator/pull/20).
 
 ### New Contributors
-* @renovate[bot] made their first contribution in [#44](https://github.com/space-code/validator/pull/44)
+* @renovate[bot] made their first contribution in 
 * @dependabot[bot] made their first contribution in [#22](https://github.com/space-code/validator/pull/22)
 
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
