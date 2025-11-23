@@ -6,7 +6,7 @@
 <a href="https://github.com/space-code/validator/blob/main/LICENSE"><img alt="Licence" src="https://img.shields.io/cocoapods/l/service-core.svg?style=flat"></a> 
 <a href="https://swiftpackageindex.com/space-code/validator"><img alt="Swift Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dswift-versions"/></a> 
 <a href="https://swiftpackageindex.com/space-code/validator"><img alt="Platform Compatibility" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fspace-code%2Fvalidator%2Fbadge%3Ftype%3Dplatforms"/></a> 
-<a href="https://github.com/space-code/validator"><img alt="CI" src="https://github.com/space-code/validator/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+<a href="https://github.com/space-code/validator/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/space-code/validator/actions/workflows/ci.yml/badge.svg?branch=main"></a>
 <a href="https://github.com/apple/swift-package-manager" alt="Validator on Swift Package Manager" title="Validator on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
 <a href="https://codecov.io/gh/space-code/validator" >  <img src="https://codecov.io/gh/space-code/validator/graph/badge.svg?token=3B8FE96372"/>  </a>
 </p>
