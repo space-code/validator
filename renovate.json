@@ -7,15 +7,26 @@
   ],
   "packageRules": [
     {
+      "matchUpdateTypes": ["major"],
+      "labels": ["major"],
+      "semanticCommitScope": "deps"
+    },
+    {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "auto",
-      "semanticCommitScope": "deps"
+      "semanticCommitScope": "deps",
+      "labels": ["minor-patch"]
     },
     {
       "matchManagers": ["swift"],
-      "semanticCommitScope": "spm"
+      "semanticCommitScope": "spm",
+      "labels": ["swift", "spm"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "labels": ["github-actions", "ci"]
     }
   ],
   "lockFileMaintenance": {
