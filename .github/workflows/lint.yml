@@ -29,6 +29,8 @@ jobs:
   discover-typos:
     name: discover-typos
     runs-on: macos-15
+    permissions:
+      contents: read
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
     steps:
