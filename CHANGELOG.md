@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
 
 ### Features
+- Add labels for major, minor, swift and GitHub Actions updates
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#57](https://github.com/space-code/validator/pull/57).
 - Add CODEOWNERS file for automatic code review assignments
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#49](https://github.com/space-code/validator/pull/49).
 - Add release workflow for GitHub Actions
