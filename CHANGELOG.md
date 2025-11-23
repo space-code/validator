@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Move pull request template
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#61](https://github.com/space-code/validator/pull/61).
 - Add explicit permissions to satisfy CodeQL
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#60](https://github.com/space-code/validator/pull/60).
 - Update a link to the github actions
