@@ -302,6 +302,7 @@ struct RegistrationView: View {
 | `RegexValidationRule` | Pattern matching validation | `RegexValidationRule(pattern: "^\\d{3}-\\d{4}$", error: "Invalid phone format")` |
 | `URLValidationRule` | Validates URL format | `URLValidationRule(error: "Please enter a valid URL")` |
 | `CreditCardValidationRule` | Validates credit card numbers (Luhn algorithm) | `CreditCardValidationRule(error: "Invalid card number")` |
+| `EmailValidationRule` | Validates email format | `EmailValidationRule(error: "Please enter a valid email")` |
 
 ## Custom Validators
 
