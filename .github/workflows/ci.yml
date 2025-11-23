@@ -18,6 +18,9 @@ on:
       - "Sources/**"
       - "Tests/**"
 
+permissions:
+    contents: read
+
 concurrency:
   group: validator-${{ github.head_ref }}
   cancel-in-progress: true

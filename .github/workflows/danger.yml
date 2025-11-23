@@ -8,6 +8,10 @@ env:
   LC_CTYPE: en_US.UTF-8
   LANG: en_US.UTF-8
 
+permissions:
+  contents: read
+  pull-requests: write
+  
 jobs:
   run-danger:
     runs-on: ubuntu-latest
