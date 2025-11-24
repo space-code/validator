@@ -3,25 +3,50 @@
 // Copyright © 2025 Space Code. All rights reserved.
 //
 
-/// A credit card validation rule.
+/// Validates credit card numbers using card type prefixes and the Luhn algorithm.
+/// Supports Visa, MasterCard, Amex, JCB, and UnionPay.
+/// The validation checks both the prefix/length of the card and the Luhn checksum.
+///
+/// # Example:
+/// ```swift
+/// let rule = CreditCardValidationRule(types: [.visa, .masterCard], error: "Invalid card")
+/// rule.validate(input: "4111 1111 1111 1111") // true for Visa
+/// ```
 public struct CreditCardValidationRule: IValidationRule {
     // MARK: Types
 
+    /// Represents the supported credit card types.
+    /// Each type has specific prefix and length rules.
     public enum CardType: String, Sendable, CaseIterable {
-        case visa, masterCard, amex, jcb, unionPay
+        /// Visa cards start with 4 and have 13, 16, or 19 digits.
+        case visa
+        /// MasterCard cards start with 51–55 and have 16 digits.
+        case masterCard
+        /// American Express cards start with 34 or 37 and have 15 digits.
+        case amex
+        /// JCB cards start with 3528–3589 and have 16 digits.
+        case jcb
+        /// UnionPay cards start with 62 and have 16–19 digits.
+        case unionPay
     }
 
     public typealias Input = String
 
     // MARK: Properties
 
+    /// Allowed card types for validation.
     public let types: [CardType]
 
-    /// The validation error.
+    /// Validation error returned if the card is invalid.
     public let error: IValidationError
 
     // MARK: Initialization
 
+    /// Initializes a credit card validation rule.
+    ///
+    /// - Parameters:
+    ///   - types: The allowed card types. Defaults to all supported card types.
+    ///   - error: The validation error to return if input fails validation.
     public init(types: [CardType] = CardType.allCases, error: IValidationError) {
         self.types = types
         self.error = error

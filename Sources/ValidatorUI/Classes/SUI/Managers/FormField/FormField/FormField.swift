@@ -7,24 +7,30 @@ import Combine
 import Foundation
 import ValidatorCore
 
+/// A convenience typealias for a Combine publisher that emits validation results.
 public typealias ValidationPublisher = AnyPublisher<ValidationResult, Never>
 
 // MARK: - FormField
 
+/// A property wrapper representing a single field in a form.
+///
+/// Encapsulates a value, its validation rules, and the validator used for checking the value.
+/// Provides automatic integration with a form via `IFormField` protocol.
 @propertyWrapper
 public final class FormField<Value>: IFormField {
     // MARK: Properties
 
-    /// The value to validate.
+    /// The value stored in the field. Wrapped with `@Published` to observe changes.
     @Published
     private var value: Value
 
-    /// The validation.
+    /// The validator used to apply rules to the value.
     private let validator: IValidator
 
-    /// The validation rules.
+    /// The rules applied to the value during validation.
     private let rules: [any IValidationRule<Value>]
 
+    /// The wrapped property value.
     public var wrappedValue: Value {
         get { value }
         set { value = newValue }
@@ -32,6 +38,12 @@ public final class FormField<Value>: IFormField {
 
     // MARK: Initialization
 
+    /// Creates a new `FormField` with a value, validator, and rules.
+    ///
+    /// - Parameters:
+    ///   - wrappedValue: The initial value of the field.
+    ///   - validator: The validator instance to use (defaults to `Validator()`).
+    ///   - rules: The array of validation rules to apply to the value.
     public init(
         wrappedValue: Value,
         validator: IValidator = Validator(),
@@ -44,6 +56,11 @@ public final class FormField<Value>: IFormField {
 
     // MARK: IFormField
 
+    /// Validates the field using its rules and connects it to a form manager.
+    ///
+    /// - Parameter manager: The form field manager that tracks this field.
+    ///
+    /// - Returns: A `IFormValidationContainer` which exposes a publisher of validation results.
     public func validate(manager: some IFormFieldManager) -> any IFormValidationContainer {
         let subject = CurrentValueSubject<Value, Never>(value)
 

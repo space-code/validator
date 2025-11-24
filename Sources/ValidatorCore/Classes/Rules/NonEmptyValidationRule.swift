@@ -5,7 +5,14 @@
 
 import Foundation
 
-/// A non empty validation rule.
+/// Validates that a string is not empty.
+///
+/// # Example:
+/// ```swift
+/// let rule = NonEmptyValidationRule(error: "Field required")
+/// rule.validate(input: "") // false
+/// rule.validate(input: "Text") // true
+/// ```
 public struct NonEmptyValidationRule: IValidationRule {
     // MARK: Types
 

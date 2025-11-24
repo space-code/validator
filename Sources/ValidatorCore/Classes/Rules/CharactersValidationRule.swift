@@ -5,7 +5,14 @@
 
 import Foundation
 
-/// A characters validation rule.
+/// Validates that a string contains only allowed characters.
+///
+/// # Example:
+/// ```swift
+/// let rule = CharactersValidationRule(characterSet: .letters, error: "Only letters allowed")
+/// rule.validate(input: "Hello") // true
+/// rule.validate(input: "Hello123") // false
+/// ```
 public struct CharactersValidationRule: IValidationRule {
     // MARK: Types
 
@@ -13,13 +20,19 @@ public struct CharactersValidationRule: IValidationRule {
 
     // MARK: Properties
 
+    /// The set of allowed characters.
     public let characterSet: CharacterSet
 
-    /// The validation error.
+    /// The validation error returned if input contains invalid characters.
     public let error: IValidationError
 
     // MARK: Initialization
 
+    /// Initializes a characters validation rule.
+    ///
+    /// - Parameters:
+    ///   - characterSet: Allowed character set.
+    ///   - error: The validation error to return if input fails validation.
     public init(characterSet: CharacterSet, error: IValidationError) {
         self.characterSet = characterSet
         self.error = error

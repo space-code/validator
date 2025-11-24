@@ -7,7 +7,7 @@ import SwiftUI
 import ValidatorCore
 
 // swiftlint:disable:next prefixed_toplevel_constant
-private nonisolated(unsafe) let validator = Validator()
+private let validator = Validator()
 
 public extension View {
     /// Validate a binding item using a set of validation rules and perform an action based on
