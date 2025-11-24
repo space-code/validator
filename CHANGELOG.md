@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Add `.spi.yml`
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#65](https://github.com/space-code/validator/pull/65).
 - Add explicit permissions to satisfy CodeQL
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#62](https://github.com/space-code/validator/pull/62).
 - Move pull request template
@@ -92,7 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#20](https://github.com/space-code/validator/pull/20).
 
 ### New Contributors
-* @renovate[bot] made their first contribution in [#64](https://github.com/space-code/validator/pull/64)
+* @renovate[bot] made their first contribution in 
 * @dependabot[bot] made their first contribution in [#22](https://github.com/space-code/validator/pull/22)
 
 ## [1.2.0](https://github.com/space-code/validator/releases/tag/1.2.0)
