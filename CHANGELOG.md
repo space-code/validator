@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
 
 ### Features
+- Add nil validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#66](https://github.com/space-code/validator/pull/66).
 - Add characters validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#67](https://github.com/space-code/validator/pull/67).
 - Add email validation rule
