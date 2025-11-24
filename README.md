@@ -303,6 +303,7 @@ struct RegistrationView: View {
 | `URLValidationRule` | Validates URL format | `URLValidationRule(error: "Please enter a valid URL")` |
 | `CreditCardValidationRule` | Validates credit card numbers (Luhn algorithm) | `CreditCardValidationRule(error: "Invalid card number")` |
 | `EmailValidationRule` | Validates email format | `EmailValidationRule(error: "Please enter a valid email")` |
+| `CharactersValidationRule` | Validates that a string contains only characters from the allowed CharacterSet | `CharactersValidationRule(characterSet: .letters, error: "Invalid characters")` |
 
 ## Custom Validators
 
