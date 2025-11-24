@@ -1,0 +1,268 @@
+# .github/actions/build-docc/action.yml
+name: 'Build DocC Documentation'
+description: 'Builds Swift DocC documentation for multiple products and platforms'
+
+inputs:
+  products:
+    description: 'Comma-separated list of product names (e.g., "ValidatorCore,ValidatorUI")'
+    required: true
+  docc-paths:
+    description: 'Comma-separated list of .docc paths (e.g., "Sources/ValidatorCore/Validator.docc,Sources/ValidatorUI/ValidatorUI.docc")'
+    required: false
+    default: ''
+  bundle-identifier-prefix:
+    description: 'Bundle identifier prefix (e.g., "dev.validator")'
+    required: false
+    default: 'dev.package'
+  bundle-version:
+    description: 'Bundle version for documentation'
+    required: false
+    default: '1.0.0'
+  platforms:
+    description: 'Comma-separated list of platforms to build for (e.g., "iOS,macOS,watchOS,tvOS,visionOS")'
+    required: false
+    default: 'iOS,macOS,watchOS,tvOS,visionOS'
+  output-path:
+    description: 'Output directory for generated documentation'
+    required: false
+    default: './docs'
+  hosting-base-path:
+    description: 'Base path for static hosting (leave empty for root)'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Verify Schemes
+      shell: bash
+      run: |
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Verifying available schemes"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        xcodebuild -list
+        echo ""
+        
+        IFS=',' read -ra PRODUCTS <<< "${{ inputs.products }}"
+        for PRODUCT in "${PRODUCTS[@]}"; do
+          if xcodebuild -list | grep -q "^\s*${PRODUCT}\s*$"; then
+            echo "✓ Scheme '${PRODUCT}' found"
+          else
+            echo "✗ Scheme '${PRODUCT}' NOT FOUND"
+            echo "  Available schemes:"
+            xcodebuild -list | grep -A 100 "Schemes:" | grep "^\s" | head -20
+            exit 1
+          fi
+        done
+    
+    - name: Setup Build Directories
+      shell: bash
+      run: |
+        mkdir -p .build/symbol-graphs
+        mkdir -p ${{ inputs.output-path }}
+    
+    - name: Build Symbol Graphs
+      shell: bash
+      run: |
+        IFS=',' read -ra PRODUCTS <<< "${{ inputs.products }}"
+        IFS=',' read -ra PLATFORMS <<< "${{ inputs.platforms }}"
+        
+        for PRODUCT in "${PRODUCTS[@]}"; do
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Building symbol graphs for ${PRODUCT}"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          
+          for PLATFORM in "${PLATFORMS[@]}"; do
+            echo "→ Platform: ${PLATFORM}"
+            SYMBOL_DIR=".build/symbol-graphs/${PRODUCT}/${PLATFORM}"
+            mkdir -p "${SYMBOL_DIR}"
+            
+            xcodebuild build \
+              -scheme "${PRODUCT}" \
+              -destination "generic/platform=${PLATFORM}" \
+              -derivedDataPath .deriveddata \
+              DOCC_EXTRACT_EXTENSION_SYMBOLS=YES \
+              OTHER_SWIFT_FLAGS="-Xfrontend -emit-symbol-graph -Xfrontend -emit-symbol-graph-dir -Xfrontend ${SYMBOL_DIR} -Xfrontend -emit-extension-block-symbols"
+            
+            BUILD_STATUS=$?
+            if [ $BUILD_STATUS -eq 0 ]; then
+              echo "✓ ${PRODUCT} built successfully for ${PLATFORM}"
+              echo "  Symbol graphs in: ${SYMBOL_DIR}"
+              ls -la "${SYMBOL_DIR}" || echo "  (empty)"
+            else
+              echo "✗ ${PRODUCT} build failed for ${PLATFORM} (exit code: ${BUILD_STATUS})"
+            fi
+          done
+        done
+    
+    - name: Generate Documentation
+      shell: bash
+      run: |
+        IFS=',' read -ra PRODUCTS <<< "${{ inputs.products }}"
+        IFS=',' read -ra DOCC_PATHS <<< "${{ inputs.docc-paths }}"
+        
+        for i in "${!PRODUCTS[@]}"; do
+          PRODUCT="${PRODUCTS[$i]}"
+          DOCC_PATH=""
+          
+          if [ ${#DOCC_PATHS[@]} -gt $i ]; then
+            DOCC_PATH="${DOCC_PATHS[$i]}"
+          fi
+          
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Generating documentation for ${PRODUCT}"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          
+          BUNDLE_ID="${{ inputs.bundle-identifier-prefix }}.${PRODUCT}"
+          SYMBOL_GRAPHS_DIR=".build/symbol-graphs/${PRODUCT}"
+          
+          # Check if symbol graphs exist
+          if [ -d "${SYMBOL_GRAPHS_DIR}" ]; then
+            SYMBOL_COUNT=$(find "${SYMBOL_GRAPHS_DIR}" -name "*.symbols.json" | wc -l)
+            echo "Found ${SYMBOL_COUNT} symbol graph files"
+            
+            if [ $SYMBOL_COUNT -gt 0 ]; then
+              echo "Symbol graph files:"
+              find "${SYMBOL_GRAPHS_DIR}" -name "*.symbols.json" -exec basename {} \; | head -10
+              
+              # Count public symbols
+              TOTAL_SYMBOLS=0
+              for SYMBOL_FILE in $(find "${SYMBOL_GRAPHS_DIR}" -name "*.symbols.json"); do
+                SYMBOL_FILE_COUNT=$(jq '[.symbols[].kind.identifier] | length' "${SYMBOL_FILE}" 2>/dev/null || echo "0")
+                TOTAL_SYMBOLS=$((TOTAL_SYMBOLS + SYMBOL_FILE_COUNT))
+              done
+              echo "Total public symbols found: ${TOTAL_SYMBOLS}"
+              
+              if [ $TOTAL_SYMBOLS -eq 0 ]; then
+                echo "⚠ Warning: Symbol graphs exist but contain no public symbols"
+                echo "  Make sure your types/functions are declared as 'public' or 'open'"
+              fi
+            else
+              echo "⚠ Warning: No symbol graphs found for ${PRODUCT}"
+              echo "  This usually means:"
+              echo "    - The build failed"
+              echo "    - There are no public APIs (everything is internal/private)"
+              echo "    - The scheme doesn't include the right targets"
+            fi
+          else
+            echo "⚠ Warning: Symbol graphs directory not found: ${SYMBOL_GRAPHS_DIR}"
+          fi
+          
+          if [ -n "${DOCC_PATH}" ] && [ -d "${DOCC_PATH}" ]; then
+            echo "Using .docc catalog: ${DOCC_PATH}"
+            echo "Contents of .docc catalog:"
+            ls -la "${DOCC_PATH}"
+            
+            $(xcrun --find docc) convert "${DOCC_PATH}" \
+              --fallback-display-name "${PRODUCT}" \
+              --fallback-bundle-identifier "${BUNDLE_ID}" \
+              --fallback-bundle-version "${{ inputs.bundle-version }}" \
+              --output-dir "${PRODUCT}.doccarchive" \
+              --additional-symbol-graph-dir "${SYMBOL_GRAPHS_DIR}"
+          else
+            echo "⚠ .docc catalog not found at: ${DOCC_PATH}"
+            echo "Generating from symbol graphs only"
+            
+            if [ ! -d "${SYMBOL_GRAPHS_DIR}" ] || [ $(find "${SYMBOL_GRAPHS_DIR}" -name "*.symbols.json" | wc -l) -eq 0 ]; then
+              echo "✗ Error: Cannot generate documentation without .docc catalog or symbol graphs"
+              continue
+            fi
+            
+            $(xcrun --find docc) convert \
+              --fallback-display-name "${PRODUCT}" \
+              --fallback-bundle-identifier "${BUNDLE_ID}" \
+              --fallback-bundle-version "${{ inputs.bundle-version }}" \
+              --output-dir "${PRODUCT}.doccarchive" \
+              --additional-symbol-graph-dir "${SYMBOL_GRAPHS_DIR}"
+          fi
+          
+          DOCC_STATUS=$?
+          if [ $DOCC_STATUS -ne 0 ]; then
+            echo "✗ Failed to generate documentation for ${PRODUCT}"
+            continue
+          fi
+          
+          # Check if .doccarchive was created
+          if [ ! -d "${PRODUCT}.doccarchive" ]; then
+            echo "✗ Error: ${PRODUCT}.doccarchive was not created"
+            continue
+          fi
+          
+          echo "✓ Documentation archive created"
+          
+          # Transform for static hosting
+          if [ -n "${{ inputs.hosting-base-path }}" ]; then
+            BASE_PATH="${{ inputs.hosting-base-path }}/${PRODUCT}"
+          else
+            BASE_PATH="${PRODUCT}"
+          fi
+          
+          echo "Transforming for static hosting with base path: ${BASE_PATH}"
+          
+          $(xcrun --find docc) process-archive transform-for-static-hosting \
+            "${PRODUCT}.doccarchive" \
+            --output-path "${{ inputs.output-path }}/${PRODUCT}" \
+            --hosting-base-path "${BASE_PATH}"
+          
+          TRANSFORM_STATUS=$?
+          if [ $TRANSFORM_STATUS -eq 0 ]; then
+            echo "✓ ${PRODUCT} documentation generated successfully"
+            echo "  Output: ${{ inputs.output-path }}/${PRODUCT}"
+            ls -la "${{ inputs.output-path }}/${PRODUCT}" | head -10
+          else
+            echo "✗ Failed to transform ${PRODUCT} for static hosting"
+          fi
+        done
+    
+    - name: Verify Generated Documentation
+      shell: bash
+      run: |
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Verifying generated documentation structure"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        
+        IFS=',' read -ra PRODUCTS <<< "${{ inputs.products }}"
+        
+        for PRODUCT in "${PRODUCTS[@]}"; do
+          DOCS_DIR="${{ inputs.output-path }}/${PRODUCT}"
+          
+          if [ ! -d "${DOCS_DIR}" ]; then
+            echo "✗ Documentation directory not found: ${DOCS_DIR}"
+            continue
+          fi
+          
+          echo "Checking ${PRODUCT}:"
+          
+          # Check for essential files
+          if [ -f "${DOCS_DIR}/index.html" ]; then
+            echo "  ✓ index.html exists"
+          else
+            echo "  ✗ index.html MISSING"
+          fi
+          
+          if [ -d "${DOCS_DIR}/documentation" ]; then
+            echo "  ✓ documentation/ directory exists"
+            DOC_COUNT=$(find "${DOCS_DIR}/documentation" -name "*.html" | wc -l)
+            echo "    Found ${DOC_COUNT} HTML documentation pages"
+          else
+            echo "  ✗ documentation/ directory MISSING"
+          fi
+          
+          if [ -d "${DOCS_DIR}/data" ]; then
+            echo "  ✓ data/ directory exists"
+            JSON_COUNT=$(find "${DOCS_DIR}/data" -name "*.json" | wc -l)
+            echo "    Found ${JSON_COUNT} JSON data files"
+          else
+            echo "  ✗ data/ directory MISSING"
+          fi
+          
+          echo ""
+        done
+    
+    - name: Cleanup Build Artifacts
+      shell: bash
+      if: always()
+      run: |
+        rm -rf .deriveddata
+        rm -rf .build
+        rm -rf *.doccarchive
