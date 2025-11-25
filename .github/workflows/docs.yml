@@ -42,13 +42,22 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Building documentation for version: $VERSION"
 
-      - name: Deploy DocC
+      - name: Build DocC
+        id: build
         uses: ./.github/actions/build-docc
         with:
           schemes: '["ValidatorCore", "ValidatorUI"]'
           version: ${{ steps.version.outputs.version }}
+
+      - name: Generate Index Page
+        uses: ./.github/actions/generate-index
+        with:
+          version: ${{ steps.build.outputs.version }}
           project-name: "Validator"
-          project-description: "Comprehensive documentation for Swift validation framework"
-          keep-old-versions: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy: true
+          project-description: "Swift validation framework"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

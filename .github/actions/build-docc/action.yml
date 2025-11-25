@@ -1,5 +1,5 @@
-name: 'Deploy DocC Documentation'
-description: 'Build and deploy Swift DocC documentation with versioning support'
+name: 'Build DocC Documentation'
+description: 'Build Swift DocC documentation with versioning support'
 author: 'Nikita Vasilev'
 
 inputs:
@@ -7,47 +7,24 @@ inputs:
     description: 'JSON array of schemes to build (e.g. ["MyLib", "MyUI"])'
     required: true
   version:
-    description: 'Documentation version (e.g. "1.0.0", "latest")'
+    description: 'Documentation version'
     required: false
     default: 'latest'
   xcode-version:
-    description: 'Xcode version to use'
+    description: 'Xcode version'
     required: false
     default: 'latest-stable'
-  project-name:
-    description: 'Project display name (defaults to repo name)'
-    required: false
-    default: ''
-  # template-repo:
-  #   description: 'Repository containing index template (owner/repo)'
-  #   required: false
-  #   default: ''
-  # template-path:
-  #   description: 'Path to index.html template in template repo'
-  #   required: false
-  #   default: 'templates/default/index.html'
-  project-description:
-    description: 'Project description for index page'
-    required: false
-    default: 'Comprehensive documentation for Swift framework'
   keep-old-versions:
-    description: 'Keep old documentation versions'
-    required: false
-    default: 'true'
-  github-token:
-    description: 'GitHub token for deployment'
-    required: true
-  deploy:
-    description: 'Deploy to GitHub Pages (true/false)'
+    description: 'Keep old versions in docs/'
     required: false
     default: 'true'
 
 outputs:
   docs-path:
-    description: 'Path to generated documentation'
+    description: 'Path to the generated docs folder'
     value: ${{ steps.build.outputs.docs_path }}
   version:
-    description: 'Documentation version that was built'
+    description: 'Version used for build'
     value: ${{ steps.parse.outputs.version }}
 
 runs:
@@ -83,28 +60,7 @@ runs:
         echo "  Version: $VERSION"
         echo "  Schemes: $SCHEMES"
 
-    - name: Checkout Existing Docs
-      if: ${{ inputs.keep-old-versions == 'true' }}
-      shell: bash
-      continue-on-error: true
-      run: |
-        echo "📦 Checking for existing documentation..."
-        git fetch origin gh-pages:gh-pages 2>/dev/null || echo "No gh-pages branch yet"
-        
-        # Try to checkout existing docs
-        if git show-ref --verify --quiet refs/heads/gh-pages; then
-          git checkout gh-pages -- . 2>/dev/null || echo "Could not checkout gh-pages"
-          
-          if [ -d "docs" ]; then
-            mkdir -p docs-old
-            cp -r docs/* docs-old/ 2>/dev/null || true
-            echo "✅ Backed up existing documentation"
-          fi
-          
-          git checkout ${{ github.ref_name }}
-        fi
-
-    - name: Build DocC Documentation
+    - name: Build DocC
       id: build
       shell: bash
       run: |
@@ -177,195 +133,3 @@ runs:
         echo "docs_path=$DOCS_DIR" >> $GITHUB_OUTPUT
         echo ""
         echo "🎉 Documentation generated for $REPO_NAME version $VERSION"
-
-    - name: Create Index Page
-      shell: bash
-      run: |
-          CURRENT_VERSION="${{ steps.version.outputs.VERSION }}"
-          REPO_NAME=$(basename "$GITHUB_REPOSITORY")
-          
-          cat > docs/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Validator Documentation</title>
-              <style>
-                  * {
-                      margin: 0;
-                      padding: 0;
-                      box-sizing: border-box;
-                  }
-                  body {
-                      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-                      background: #f5f5f7;
-                      min-height: 100vh;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      padding: 40px 20px;
-                      color: #1d1d1f;
-                  }
-                  .container {
-                      max-width: 980px;
-                      width: 100%;
-                  }
-                  header {
-                      text-align: center;
-                      margin-bottom: 60px;
-                  }
-                  h1 {
-                      font-size: 56px;
-                      font-weight: 600;
-                      letter-spacing: -0.005em;
-                      line-height: 1.07143;
-                      margin-bottom: 8px;
-                      color: #1d1d1f;
-                  }
-                  .subtitle {
-                      font-size: 28px;
-                      font-weight: 400;
-                      line-height: 1.14286;
-                      color: #6e6e73;
-                  }
-                  .version-badge {
-                      display: inline-block;
-                      background: #0071e3;
-                      color: white;
-                      padding: 6px 14px;
-                      border-radius: 16px;
-                      font-size: 14px;
-                      font-weight: 600;
-                      margin-top: 12px;
-                  }
-                  .docs-grid {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                      gap: 24px;
-                      margin-bottom: 40px;
-                  }
-                  .doc-card {
-                      background: white;
-                      border-radius: 18px;
-                      padding: 40px;
-                      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                      text-decoration: none;
-                      display: block;
-                      border: 1px solid rgba(0,0,0,0.06);
-                  }
-                  .doc-card:hover {
-                      transform: translateY(-4px);
-                      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-                  }
-                  .doc-card h2 {
-                      font-size: 32px;
-                      font-weight: 600;
-                      margin-bottom: 12px;
-                      color: #1d1d1f;
-                      letter-spacing: -0.003em;
-                  }
-                  .doc-card p {
-                      font-size: 17px;
-                      line-height: 1.47059;
-                      color: #6e6e73;
-                      margin-bottom: 20px;
-                  }
-                  .doc-card .link {
-                      font-size: 17px;
-                      color: #0071e3;
-                      font-weight: 400;
-                      display: inline-flex;
-                      align-items: center;
-                  }
-                  .doc-card .link::after {
-                      content: '→';
-                      margin-left: 8px;
-                      transition: transform 0.3s ease;
-                  }
-                  .doc-card:hover .link::after {
-                      transform: translateX(4px);
-                  }
-                  .module-badge {
-                      display: inline-block;
-                      background: #f5f5f7;
-                      color: #6e6e73;
-                      padding: 4px 12px;
-                      border-radius: 12px;
-                      font-size: 12px;
-                      font-weight: 600;
-                      letter-spacing: 0.5px;
-                      text-transform: uppercase;
-                      margin-bottom: 16px;
-                  }
-                  footer {
-                      text-align: center;
-                      padding-top: 40px;
-                      border-top: 1px solid rgba(0,0,0,0.08);
-                      margin-top: 40px;
-                  }
-                  footer p {
-                      font-size: 14px;
-                      color: #86868b;
-                  }
-                  @media (max-width: 768px) {
-                      h1 {
-                          font-size: 40px;
-                      }
-                      .subtitle {
-                          font-size: 21px;
-                      }
-                      .docs-grid {
-                          grid-template-columns: 1fr;
-                      }
-                      .doc-card {
-                          padding: 32px;
-                      }
-                  }
-              </style>
-          </head>
-          <body>
-              <div class="container">
-                  <header>
-                      <h1>Validator</h1>
-                      <p class="subtitle">Comprehensive documentation for Swift validation framework</p>
-                      <span class="version-badge">VERSION_PLACEHOLDER</span>
-                  </header>
-                  
-                  <div class="docs-grid">
-                      <a href="VERSION_PLACEHOLDER/ValidatorCore/documentation/validatorcore" class="doc-card">
-                          <span class="module-badge">Core Module</span>
-                          <h2>ValidatorCore</h2>
-                          <p>Core validation functionality and rules for Swift applications. Contains base types, protocols, and validator implementations.</p>
-                          <span class="link">View documentation</span>
-                      </a>
-                      
-                      <a href="VERSION_PLACEHOLDER/ValidatorUI/documentation/validatorui" class="doc-card">
-                          <span class="module-badge">UI Module</span>
-                          <h2>ValidatorUI</h2>
-                          <p>UI components and helpers for building validation interfaces. Ready-to-use solutions for SwiftUI and UIKit.</p>
-                          <span class="link">View documentation</span>
-                      </a>
-                  </div>
-                  
-                  <footer>
-                      <p>Generated with Swift DocC</p>
-                  </footer>
-              </div>
-          </body>
-          </html>
-          EOF
-          
-          # Replace VERSION_PLACEHOLDER with actual version
-          sed -i '' "s/VERSION_PLACEHOLDER/$CURRENT_VERSION/g" docs/index.html || \
-          sed -i "s/VERSION_PLACEHOLDER/$CURRENT_VERSION/g" docs/index.html
-          
-          echo "✅ Index page created with version $CURRENT_VERSION"
-      
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ inputs.github-token }}
-        publish_dir: ./docs
-        force_orphan: true
