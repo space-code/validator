@@ -10,13 +10,13 @@ on:
       - "Package.swift"
       - "Sources/**"
       - "Tests/**"
-  pull_request:
-    paths:
-      - '.swiftlint.yml'
-      - ".github/workflows/**"
-      - "Package.swift"
-      - "Sources/**"
-      - "Tests/**"
+  # pull_request:
+  #   paths:
+  #     - '.swiftlint.yml'
+  #     - ".github/workflows/**"
+  #     - "Package.swift"
+  #     - "Sources/**"
+  #     - "Tests/**"
 
 permissions:
     contents: read
