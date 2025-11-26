@@ -44,7 +44,7 @@ jobs:
 
       - name: Build DocC
         id: build
-        uses: ./.github/actions/build-docc
+        uses: space-code/build-docc@main
         with:
           schemes: '["ValidatorCore", "ValidatorUI"]'
           version: ${{ steps.version.outputs.version }}
