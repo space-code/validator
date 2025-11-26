@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-  # pull_request:
-  #   paths:
-  #     - "Sources/**"
-  #     - ".github/workflows/ci.yml"
-  #     - "Tests/**"
+  pull_request:
+    paths:
+      - "Sources/**"
+      - ".github/workflows/ci.yml"
+      - "Tests/**"
 
 concurrency:
   group: lint-${{ github.head_ref }}
