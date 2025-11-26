@@ -5,12 +5,14 @@
 
 import Foundation
 
+/// `ValidationResult` represents the outcome of a validation operation.
+/// It can either be `.valid` when all checks pass or `.invalid` with a list of errors.
 public enum ValidationResult {
-    /// Indicates that the validation was successful.
+    /// Indicates that validation succeeded.
     case valid
 
-    /// Indicates that the validation failed with a list of errors.
+    /// Indicates that validation failed.
     ///
-    /// - Parameter errors: An array of validation errors.
+    /// - Parameter errors: An array of `IValidationError` instances describing each failure.
     case invalid(errors: [IValidationError])
 }

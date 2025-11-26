@@ -5,7 +5,14 @@
 
 import Foundation
 
-/// An email validation rule.
+/// Validates that a string is a valid email address.
+/// Uses a regular expression conforming to RFC 5322 (simplified).
+///
+/// # Example:
+/// ```swift
+/// let rule = EmailValidationRule(error: "Invalid email")
+/// rule.validate(input: "user@example.com") // true
+/// ```
 public struct EmailValidationRule: IValidationRule {
     // MARK: Types
 
@@ -13,11 +20,15 @@ public struct EmailValidationRule: IValidationRule {
 
     // MARK: Properties
 
-    /// The validation error.
+    /// Validation error returned if the email is invalid.
     public let error: IValidationError
 
     // MARK: Initialization
 
+    /// Initializes an email validation rule.
+    ///
+    /// - Parameters:
+    ///   - error: The validation error to return if input fails validation.
     public init(error: IValidationError) {
         self.error = error
     }

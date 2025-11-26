@@ -39,24 +39,25 @@ import ValidatorCore
 public struct ValidationViewModifier<T, ErrorView: View>: ViewModifier {
     // MARK: Properties
 
-    /// The result of the validation.
+    /// The current result of the validation.
+    /// Updated whenever the value changes or rules are applied.
     @State private var validationResult: ValidationResult = .valid
 
-    /// The binding item to validate.
+    /// The value to validate, wrapped as a `Binding` so changes are observed automatically.
     @Binding private var item: T
 
-    /// A custom parameter attribute that constructs views from closures.
+    /// A closure that constructs a SwiftUI view from a list of validation errors.
     @ViewBuilder private let content: ([any IValidationError]) -> ErrorView
 
-    /// The array of validation rules to apply to the item's value.
+    /// The array of validation rules applied to the binding value.
     public let rules: [any IValidationRule<T>]
 
     /// Creates a new instance of the `ValidationViewModifier`.
     ///
     /// - Parameters:
-    ///   - item: The binding item to validate.
-    ///   - rules: The array of validation rules to apply to the item's value.
-    ///   - content: A custom parameter attribute that constructs an error view from closures.
+    ///   - item: The binding value to validate.
+    ///   - rules: The array of validation rules to apply.
+    ///   - content: A closure that builds a custom error view from the validation errors.
     public init(
         item: Binding<T>,
         rules: [any IValidationRule<T>],
@@ -69,6 +70,11 @@ public struct ValidationViewModifier<T, ErrorView: View>: ViewModifier {
 
     // MARK: ViewModifier
 
+    /// Modifies the view to include validation logic and error messages below the content.
+    ///
+    /// - Parameter content: The original view content.
+    ///
+    /// - Returns: A view containing the original content and validation messages.
     public func body(content: Content) -> some View {
         VStack(alignment: .leading) {
             content

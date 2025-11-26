@@ -5,7 +5,14 @@
 
 import Foundation
 
-/// A prefix validation rule.
+/// Validates that a string starts with a specific prefix.
+///
+/// # Example:
+/// ```swift
+/// let rule = PrefixValidationRule(prefix: "https://", error: "Must start with https://")
+/// rule.validate(input: "https://example.com") // true
+/// rule.validate(input: "http://example.com") // false
+/// ```
 public struct PrefixValidationRule: IValidationRule {
     // MARK: Types
 
@@ -13,7 +20,7 @@ public struct PrefixValidationRule: IValidationRule {
 
     // MARK: Properties
 
-    /// The prefix.
+    /// The prefix that the input must start with.
     public let prefix: Input
 
     /// The validation error.
@@ -21,6 +28,11 @@ public struct PrefixValidationRule: IValidationRule {
 
     // MARK: Initialization
 
+    /// Initializes a characters validation rule.
+    ///
+    /// - Parameters:
+    ///   - prefix: The string that the input must start with.
+    ///   - error: The validation error to return if input fails validation.
     public init(prefix: Input, error: IValidationError) {
         self.prefix = prefix
         self.error = error
