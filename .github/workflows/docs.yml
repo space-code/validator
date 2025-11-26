@@ -52,9 +52,24 @@ jobs:
       - name: Generate Index Page
         uses: ./.github/actions/generate-index
         with:
-          version: ${{ steps.build.outputs.version }}
-          project-name: "Validator"
-          project-description: "Swift validation framework"
+          version: ${{ steps.version.outputs.version }}
+          project-name: 'Validator'
+          project-description: 'Validator is a modern, lightweight Swift framework that provides elegant and type-safe input validation.'
+          modules: |
+            [
+              {
+                "name": "ValidatorCore",
+                "path": "validatorcore",
+                "description": "Core validation functionality and rules for Swift applications. Contains base types, protocols, and validator implementations.",
+                "badge": "Core Module"
+              },
+              {
+                "name": "ValidatorUI",
+                "path": "validatorui",
+                "description": "UI components and helpers for building validation interfaces. Ready-to-use solutions for SwiftUI and UIKit.",
+                "badge": "UI Module"
+              }
+            ]
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
