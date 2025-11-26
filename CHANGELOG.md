@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#29](https://github.com/space-code/validator/pull/29).
 
 ### Documentation
+- Add a documentation
+  - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#68](https://github.com/space-code/validator/pull/68).
 - Update project structure
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
 
