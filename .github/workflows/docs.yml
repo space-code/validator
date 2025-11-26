@@ -50,7 +50,7 @@ jobs:
           version: ${{ steps.version.outputs.version }}
 
       - name: Generate Index Page
-        uses: ./.github/actions/generate-index
+        uses: space-code/generate-index@v1.0.0
         with:
           version: ${{ steps.version.outputs.version }}
           project-name: 'Validator'
