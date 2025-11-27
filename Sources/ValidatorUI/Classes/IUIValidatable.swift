@@ -26,6 +26,12 @@ public protocol IUIValidatable: AnyObject {
     /// The input value that needs to be validated.
     var inputValue: Input { get }
 
+    /// The most recent validation result, if any.
+    ///
+    /// This value is updated automatically when calling `validate(rules:)`.
+    /// Implementations may use this property to drive UI updates.
+    var validationResult: ValidationResult? { get }
+
     /// Validates the input value using a single rule.
     ///
     /// - Parameter rule: A validation rule conforming to `IValidationRule`.
@@ -48,9 +54,10 @@ public protocol IUIValidatable: AnyObject {
 
 // MARK: - Associated Object Keys
 
-// Keys used for storing associated objects (validation rules and handlers)
+// Keys used for storing associated objects (validation rules, handlers, and a validation result)
 private nonisolated(unsafe) var kValidationRules: UInt8 = 0
 private nonisolated(unsafe) var kValidationHandler: UInt8 = 0
+private nonisolated(unsafe) var kValidationResult: UInt8 = 0
 
 // Validator instance shared for UI validation
 // swiftlint:disable:next prefixed_toplevel_constant
@@ -78,6 +85,7 @@ public extension IUIValidatable {
     func validate(rules: [any IValidationRule<Input>]) -> ValidationResult {
         let result = validator.validate(input: inputValue, rules: rules)
         validationHandler?(result)
+        validationResult = result
         return result
     }
 
@@ -86,6 +94,24 @@ public extension IUIValidatable {
     /// - Parameter rule: The validation rule to add.
     func add(rule: some IValidationRule<Input>) {
         validationRules.append(rule)
+    }
+
+    /// The most recent validation result, if any.
+    ///
+    /// This value is updated automatically when calling `validate(rules:)`.
+    /// Implementations may use this property to drive UI updates.
+    private(set) var validationResult: ValidationResult? {
+        get {
+            (objc_getAssociatedObject(self, &kValidationResult) as? AnyObject) as? ValidationResult
+        }
+        set {
+            objc_setAssociatedObject(
+                self,
+                &kValidationResult,
+                newValue as ValidationResult?,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
+        }
     }
 
     /// The array of validation rules associated with this UI element.

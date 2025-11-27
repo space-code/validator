@@ -40,7 +40,6 @@ public final class FormFieldManager: IFormFieldManager {
     /// The manager subscribes to the validator's publisher so that any changes
     /// in validation results automatically trigger re-evaluation of the form's overall validity.
     public func append(validator: some IFormValidationContainer) {
-        // Subscribe to validation updates for this field
         validator
             .publisher
             .sink(receiveValue: { [weak self] _ in
