@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
 
 ### Features
+- Add validationResult property to UI validation flow
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#73](https://github.com/space-code/validator/pull/73).
 - Add debounce to text field input to reduce validation calls
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#72](https://github.com/space-code/validator/pull/72).
 - Add nil validation rule
