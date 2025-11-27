@@ -30,6 +30,9 @@ public final class FormField<Value>: IFormField {
     /// The rules applied to the value during validation.
     private let rules: [any IValidationRule<Value>]
 
+    /// The time the publisher should wait before publishing an element.
+    private let debounce: TimeInterval
+
     /// The wrapped property value.
     public var wrappedValue: Value {
         get { value }
@@ -44,14 +47,17 @@ public final class FormField<Value>: IFormField {
     ///   - wrappedValue: The initial value of the field.
     ///   - validator: The validator instance to use (defaults to `Validator()`).
     ///   - rules: The array of validation rules to apply to the value.
+    ///   - debounce: The time the publisher should wait before publishing an element.
     public init(
         wrappedValue: Value,
         validator: IValidator = Validator(),
-        rules: [any IValidationRule<Value>]
+        rules: [any IValidationRule<Value>],
+        debounce: TimeInterval = .zero
     ) {
         value = wrappedValue
         self.validator = validator
         self.rules = rules
+        self.debounce = debounce
     }
 
     // MARK: IFormField
@@ -66,6 +72,8 @@ public final class FormField<Value>: IFormField {
 
         let publisher = $value
             .receive(on: RunLoop.main)
+            .dropFirst()
+            .debounce(for: RunLoop.SchedulerTimeType.Stride(debounce), scheduler: RunLoop.main)
             .handleEvents(receiveOutput: { subject.send($0) })
             .map { self.validator.validate(input: $0, rules: self.rules) }
             .eraseToAnyPublisher()
