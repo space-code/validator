@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#54](https://github.com/space-code/validator/pull/54).
 
 ### Features
+- Add debounce to text field input to reduce validation calls
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#72](https://github.com/space-code/validator/pull/72).
 - Add nil validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#66](https://github.com/space-code/validator/pull/66).
 - Add characters validation rule
