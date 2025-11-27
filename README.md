@@ -37,7 +37,11 @@ Validator is a modern, lightweight Swift framework that provides elegant and typ
   - [Form Validation](#form-validation)
 - [Built-in Validators](#built-in-validators)
 - [Custom Validators](#custom-validators)
+- [Examples](#examples)
+- [Communication](#communication)
 - [Contributing](#contributing)
+    - [Development Setup](#development-setup)
+    - [Code of Conduct](#code-of-conduct)
 - [License](#license)
 
 ## Requirements
@@ -394,6 +398,13 @@ SecureField("Password", text: $password)
         }
     }
 ```
+
+## Examples
+
+You can find usage examples in the [Examples](./Examples/) directory of the repository.  
+
+These examples demonstrate how to integrate the package, configure validation rules,  
+and build real-world user interfaces using `ValidatorCore` and `ValidatorUI`.
 
 ## Communication
 
