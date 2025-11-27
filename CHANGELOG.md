@@ -48,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Add usage examples to the examples directory
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#74](https://github.com/space-code/validator/pull/74).
 - Add `.spi.yml`
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#65](https://github.com/space-code/validator/pull/65).
 - Add explicit permissions to satisfy CodeQL
