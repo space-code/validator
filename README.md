@@ -68,7 +68,7 @@ Add the following dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/validator.git", from: "1.2.0")
+    .package(url: "https://github.com/space-code/validator.git", from: "1.3.0")
 ]
 ```
 
