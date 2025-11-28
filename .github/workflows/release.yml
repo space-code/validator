@@ -18,6 +18,10 @@ jobs:
     name: release
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      has-changes: ${{ steps.check-changes.outputs.has-changes }}
+      next-version: ${{ steps.next-version.outputs.NEXT_VERSION }}
+      commit-hash: ${{ steps.auto-commit-action.outputs.commit_hash }}
     steps:
       - uses: actions/checkout@v6
         with:
