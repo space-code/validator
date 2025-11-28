@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Bug Fixes
+- Fix the lint action
+  - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#77](https://github.com/space-code/validator/pull/77).
 - Ensure form manager correctly updates isValid
   - Fixed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#55](https://github.com/space-code/validator/pull/55).
 - Update paths
