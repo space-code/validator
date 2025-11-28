@@ -16,7 +16,7 @@ permissions:
 jobs:
   release:
     name: release
-    runs-on: "ubuntu-latest"
+    runs-on: "macos-latest"
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
@@ -74,7 +74,7 @@ jobs:
           echo "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)." >> "$GITHUB_OUTPUT"
           echo "" >> "$GITHUB_OUTPUT"
 
-          git cliff --config ./cliff.toml --latest --strip header | awk 'NF{p=1} p' | tail -n +2 >> "$GITHUB_OUTPUT"
+          git cliff --config ./cliff.toml --tag ${{ steps.next-version.outputs.NEXT_VERSION }} --unreleased --strip header | awk 'NF{p=1} p' | tail -n +2 >> "$GITHUB_OUTPUT"
 
           echo "EOF" >> "$GITHUB_OUTPUT"
       - name: Commit changes
