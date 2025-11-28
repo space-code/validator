@@ -50,6 +50,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Pass outputs parameters
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#79](https://github.com/space-code/validator/pull/79).
+- Update the changelog file generation
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#78](https://github.com/space-code/validator/pull/78).
 - Add skipping commit verification
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#76](https://github.com/space-code/validator/pull/76).
 - Add docs generation into the release github action
@@ -167,3 +171,4 @@ Released on 2023-10-09. All issues associated with this milestone can be found u
 [1.2.0]: https://github.com/space-code/validator/compare/1.1.0..1.2.0
 [1.1.0]: https://github.com/space-code/validator/compare/1.0.1..1.1.0
 [1.0.1]: https://github.com/space-code/validator/compare/1.0.0..1.0.1
+
