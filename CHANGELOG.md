@@ -48,6 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#32](https://github.com/space-code/validator/pull/32).
 
 ### Miscellaneous Tasks
+- Add skipping commit verification
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#76](https://github.com/space-code/validator/pull/76).
 - Add docs generation into the release github action
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#75](https://github.com/space-code/validator/pull/75).
 - Add usage examples to the examples directory
