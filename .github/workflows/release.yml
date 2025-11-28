@@ -82,7 +82,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         if: steps.check-changes.outputs.has-changes == 'true'
         with:
-          commit_options: "--allow-empty"
+          commit_options: "--allow-empty --no-verify"
           tagging_message: ${{ steps.next-version.outputs.NEXT_VERSION }}
           skip_dirty_check: true
           commit_message: "[Release] Validator ${{ steps.next-version.outputs.NEXT_VERSION }}"
