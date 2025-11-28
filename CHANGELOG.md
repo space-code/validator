@@ -6,12 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 #### 1.x Releases
+- `1.3.x` Releases - [1.3.0](#130)
 - `1.2.x` Releases - [1.2.0](#120)
 - `1.1.x` Releases - [1.1.0](#110)
 - `1.0.x` Releases - [1.0.1](#101) | [1.0.0](#100)
 
 ---
-## [Unreleased]
+
+
+## [1.3.0](https://github.com/space-code/validator/releases/tag/1.3.0)
+
+Released on 2025-11-28. All issues associated with this milestone can be found using this [filter](https://github.com/space-code/validator/milestones?state=closed&q=1.3.0).
 
 ### Bug Fixes
 - Fix the lint action
@@ -167,7 +172,7 @@ Released on 2023-10-09. All issues associated with this milestone can be found u
 - Implement `Validator` package
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#1](https://github.com/space-code/validator/pull/1).
 
-[unreleased]: https://github.com/space-code/validator/compare/1.2.0..HEAD
+[1.3.0]: https://github.com/space-code/validator/compare/1.2.0..1.3.0
 [1.2.0]: https://github.com/space-code/validator/compare/1.1.0..1.2.0
 [1.1.0]: https://github.com/space-code/validator/compare/1.0.1..1.1.0
 [1.0.1]: https://github.com/space-code/validator/compare/1.0.0..1.0.1
