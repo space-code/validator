@@ -31,6 +31,8 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``RegexValidationRule``
 - ``SuffixValidationRule``
 - ``URLValidationRule``
+- ``NilValidationRule``
+- ``PositiveNumberValidationRule``
 
 ### Articles
 
