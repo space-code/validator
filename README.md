@@ -309,6 +309,7 @@ struct RegistrationView: View {
 | `EmailValidationRule` | Validates email format | `EmailValidationRule(error: "Please enter a valid email")` |
 | `CharactersValidationRule` | Validates that a string contains only characters from the allowed CharacterSet | `CharactersValidationRule(characterSet: .letters, error: "Invalid characters")` |
 | `NilValidationRule` | Validates that value is nil | `NilValidationRule(error: "Value must be nil")`
+| `PositiveNumberValidationRule` | Validates that value is positive | `PositiveNumberValidationRule(error: "Value must be positive")`
 
 ## Custom Validators
 
