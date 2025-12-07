@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Features
+- Add comparison validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#86](https://github.com/space-code/validator/pull/86).
 - Add equality validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#85](https://github.com/space-code/validator/pull/85).
 - Add contains substring validation rule
