@@ -311,6 +311,7 @@ struct RegistrationView: View {
 | `NilValidationRule` | Validates that value is nil | `NilValidationRule(error: "Value must be nil")`
 | `PositiveNumberValidationRule` | Validates that value is positive | `PositiveNumberValidationRule(error: "Value must be positive")`
 | `NoWhitespaceValidationRule` | Validates that a string does not contain any whitespace characters | `NoWhitespaceValidationRule(error: "Spaces are not allowed")`
+| `ContainsValidationRule` | Validates that a string contains a specific substring | `ContainsValidationRule(substring: "@", error: "Must contain @")`
 
 ## Custom Validators
 
