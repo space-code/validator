@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 ## [Unreleased]
 
+### Features
+- Add positive number validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#82](https://github.com/space-code/validator/pull/82).
+
 ### Miscellaneous Tasks
 - Update `danger.yml`
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#81](https://github.com/space-code/validator/pull/81).
