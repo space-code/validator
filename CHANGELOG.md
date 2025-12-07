@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Features
+- Add contains substring validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#84](https://github.com/space-code/validator/pull/84).
 - Add no-whitespace validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#83](https://github.com/space-code/validator/pull/83).
 - Add positive number validation rule
