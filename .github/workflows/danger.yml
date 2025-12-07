@@ -26,7 +26,9 @@ jobs:
       - name: Setup gems
         run: |
           gem install bundler
-          bundle install --clean --path vendor/bundle
+          bundle config set clean true
+          bundle config set path 'vendor/bundle'
+          bundle install
       - name: danger
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
