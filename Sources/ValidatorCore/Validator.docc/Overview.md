@@ -36,6 +36,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``NoWhitespaceValidationRuleTests``
 - ``ContainsValidationRule``
 - ``EqualityValidationRule``
+- ``ComparisonValidationRule``
 
 ### Articles
 

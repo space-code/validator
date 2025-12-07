@@ -313,6 +313,7 @@ struct RegistrationView: View {
 | `NoWhitespaceValidationRule` | Validates that a string does not contain any whitespace characters | `NoWhitespaceValidationRule(error: "Spaces are not allowed")`
 | `ContainsValidationRule` | Validates that a string contains a specific substring | `ContainsValidationRule(substring: "@", error: "Must contain @")`
 | `EqualityValidationRule`| Validates that the input is equal to a given reference value | `EqualityValidationRule(compareTo: password, error: "Passwords do not match")`
+| `ComparisonValidationRule` | Validates that input against a comparison constraint | `ComparisonValidationRule(greaterThan: 0, error: "Must be greater than 0")`
 
 ## Custom Validators
 
