@@ -310,6 +310,7 @@ struct RegistrationView: View {
 | `CharactersValidationRule` | Validates that a string contains only characters from the allowed CharacterSet | `CharactersValidationRule(characterSet: .letters, error: "Invalid characters")` |
 | `NilValidationRule` | Validates that value is nil | `NilValidationRule(error: "Value must be nil")`
 | `PositiveNumberValidationRule` | Validates that value is positive | `PositiveNumberValidationRule(error: "Value must be positive")`
+| `NoWhitespaceValidationRule` | Validates that a string does not contain any whitespace characters | `NoWhitespaceValidationRule(error: "Spaces are not allowed")`
 
 ## Custom Validators
 

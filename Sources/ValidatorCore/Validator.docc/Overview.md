@@ -33,6 +33,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``URLValidationRule``
 - ``NilValidationRule``
 - ``PositiveNumberValidationRule``
+- ``NoWhitespaceValidationRuleTests``
 
 ### Articles
 
