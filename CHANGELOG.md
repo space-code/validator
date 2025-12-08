@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Features
+- Add iban validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#88](https://github.com/space-code/validator/pull/88).
 - Add comparison validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#86](https://github.com/space-code/validator/pull/86).
 - Add equality validation rule
