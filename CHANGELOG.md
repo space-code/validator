@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Features
+- Add postal code validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#90](https://github.com/space-code/validator/pull/90).
 - Add ip address validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#89](https://github.com/space-code/validator/pull/89).
 - Add iban validation rule
