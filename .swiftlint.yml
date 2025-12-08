@@ -97,6 +97,9 @@ identifier_name:
   excluded:
     - id
     - URL
+    - ip
+    - v6
+    - v4
 
 analyzer_rules:
   - unused_import
