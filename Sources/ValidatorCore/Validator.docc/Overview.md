@@ -38,6 +38,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``EqualityValidationRule``
 - ``ComparisonValidationRule``
 - ``IBANValidationRule``
+- ``IPAddressValidationRule``
 
 ### Articles
 
