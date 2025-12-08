@@ -316,6 +316,7 @@ struct RegistrationView: View {
 | `ComparisonValidationRule` | Validates that input against a comparison constraint | `ComparisonValidationRule(greaterThan: 0, error: "Must be greater than 0")`
 | `IBANValidationRule` | Validates that a string is a valid IBAN (International Bank Account Number) | `IBANValidationRule(error: "Invalid IBAN")`
 | `IPAddressValidationRule` | Validates that a string is a valid IPv4 or IPv6 address | `IPAddressValidationRule(version: .v4, error: ValidationError("Invalid IPv4"))`
+| `PostalCodeValidationRule` | Validates postal/ZIP codes for different countries | `PostalCodeValidationRule(country: .uk, error: "Invalid post code")`
 
 ## Custom Validators
 
