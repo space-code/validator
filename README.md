@@ -314,6 +314,7 @@ struct RegistrationView: View {
 | `ContainsValidationRule` | Validates that a string contains a specific substring | `ContainsValidationRule(substring: "@", error: "Must contain @")`
 | `EqualityValidationRule`| Validates that the input is equal to a given reference value | `EqualityValidationRule(compareTo: password, error: "Passwords do not match")`
 | `ComparisonValidationRule` | Validates that input against a comparison constraint | `ComparisonValidationRule(greaterThan: 0, error: "Must be greater than 0")`
+| `IBANValidationRule` | Validates that a string is a valid IBAN (International Bank Account Number) | `IBANValidationRule(error: "Invalid IBAN")`
 
 ## Custom Validators
 
