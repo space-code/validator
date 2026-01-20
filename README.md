@@ -317,6 +317,7 @@ struct RegistrationView: View {
 | `IBANValidationRule` | Validates that a string is a valid IBAN (International Bank Account Number) | `IBANValidationRule(error: "Invalid IBAN")`
 | `IPAddressValidationRule` | Validates that a string is a valid IPv4 or IPv6 address | `IPAddressValidationRule(version: .v4, error: ValidationError("Invalid IPv4"))`
 | `PostalCodeValidationRule` | Validates postal/ZIP codes for different countries | `PostalCodeValidationRule(country: .uk, error: "Invalid post code")`
+| `DependentValidationRule` | Validates another field's value to determine which rule to apply | ``DependentValidationRule<String, String>(dependsOn: countryField, error: "Invalid", ruleProvider: { $0 == "US" ? USPhoneRule() : InternationalPhoneRule() })``
 
 ## Custom Validators
 
