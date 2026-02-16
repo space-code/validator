@@ -41,6 +41,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``IPAddressValidationRule``
 - ``PostalCodeValidationRule``
 - ``Base64ValidationRule``
+- ``UUIDValidationRule``
 
 ### Articles
 

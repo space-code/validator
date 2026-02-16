@@ -5,22 +5,22 @@
 
 import Foundation
 
-/// Validates that a string represents a valid URL.
+/// Validates that a string represents a valid UUID.
 ///
 /// # Example:
 /// ```swift
-/// let rule = URLValidationRule(error: "Invalid URL")
-/// rule.validate(input: "https://example.com") // true
-/// rule.validate(input: "not_a_url") // false
+/// let rule = UUIDValidationRule(error: "Invalid UUID")
+/// rule.validate(input: "47273ec2-e638-4702-8325-dcf82ed6a95b") // true
+/// rule.validate(input: "47273ec2") // false
 /// ```
-public struct URLValidationRule: IValidationRule {
+public struct UUIDValidationRule: IValidationRule {
     // MARK: Types
 
     public typealias Input = String
 
     // MARK: Properties
 
-    /// The validation error returned if the input is not a valid URL.
+    /// The validation error returned if the input is not a valid UUID.
     public let error: IValidationError
 
     // MARK: Initialization
@@ -35,7 +35,6 @@ public struct URLValidationRule: IValidationRule {
     // MARK: IValidationRule
 
     public func validate(input: String) -> Bool {
-        guard let url = URL(string: input) else { return false }
-        return url.isFileURL || (url.host != nil && url.scheme != nil)
+        UUID(uuidString: input) != nil
     }
 }
