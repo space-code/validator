@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Features
+- Add uuid validation rule
+  - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#114](https://github.com/space-code/validator/pull/114).
 - Add base64 validation rule
   - Implemented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#115](https://github.com/space-code/validator/pull/115).
 - Make IValidatorError conform to LocalizedError
