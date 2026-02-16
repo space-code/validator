@@ -9,7 +9,9 @@
     extension NSTextField: IUIValidatable {
         /// The value of the text field to validate.
         /// Returns an empty string if `text` is nil.
-        public var inputValue: String { stringValue }
+        public var inputValue: String {
+            stringValue
+        }
 
         /// The type of input for validation.
         public typealias Input = String

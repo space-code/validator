@@ -10,7 +10,7 @@ import ValidatorUI
 final class LoginTextFieldExampleViewController: UIViewController {
     // MARK: - Properties
 
-    // UI
+    /// UI
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ final class LoginTextFieldExampleViewController: UIViewController {
         return stackView
     }()
 
-    // Private properties
+    /// Private properties
     private var isValid: Bool {
         [firstNameTextField, lastNameTextField, emailTextField]
             .allSatisfy { $0.validationResult == .valid }

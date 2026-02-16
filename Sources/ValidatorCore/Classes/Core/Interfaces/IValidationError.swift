@@ -5,6 +5,8 @@
 
 import Foundation
 
+// MARK: - IValidationError
+
 /// `IValidationError` is the protocol representing a validation error in `ValidatorCore`.
 /// Any type conforming to `IValidationError` can be returned when validation fails.
 ///
@@ -14,7 +16,13 @@ import Foundation
 ///     var message: String { "Invalid input" }
 /// }
 /// ```
-public protocol IValidationError: Error {
+public protocol IValidationError: LocalizedError {
     /// A human-readable error message describing why validation failed.
     var message: String { get }
+}
+
+public extension IValidationError {
+    var errorDescription: String? {
+        message
+    }
 }
