@@ -40,6 +40,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``IBANValidationRule``
 - ``IPAddressValidationRule``
 - ``PostalCodeValidationRule``
+- ``Base64ValidationRule``
 
 ### Articles
 
