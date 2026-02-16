@@ -319,7 +319,8 @@ struct RegistrationView: View {
 | `PostalCodeValidationRule` | Validates postal/ZIP codes for different countries | `PostalCodeValidationRule(country: .uk, error: "Invalid post code")`
 | `Base64ValidationRule` | | `Base64ValidationRule(error: "The input is not valid Base64.")`
 | `UUIDValidationRule` | Validates UUID format | `UUIDValidationRule(error: "Please enter a valid UUID")` |
-
+| `JSONValidationRule` | Validates that a string represents valid JSON | `JSONValidationRule(error: "Invalid JSON")`
+ 
 ## Custom Validators
 
 Create custom validation rules by conforming to `IValidationRule`:

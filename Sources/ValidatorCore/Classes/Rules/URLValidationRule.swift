@@ -5,14 +5,14 @@
 
 import Foundation
 
-/// Validates that a string represents a valid URL.
-///
-/// # Example:
-/// ```swift
-/// let rule = URLValidationRule(error: "Invalid URL")
-/// rule.validate(input: "https://example.com") // true
-/// rule.validate(input: "not_a_url") // false
-/// ```
+// Validates that a string represents a valid URL.
+//
+// # Example:
+// ```swift
+// let rule = URLValidationRule(error: "Invalid URL")
+// rule.validate(input: "https://example.com") // true
+// rule.validate(input: "not_a_url") // false
+// ```
 public struct URLValidationRule: IValidationRule {
     // MARK: Types
 

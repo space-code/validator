@@ -42,6 +42,7 @@ ValidatorCore contains all core validation rules, utilities, and mechanisms for 
 - ``PostalCodeValidationRule``
 - ``Base64ValidationRule``
 - ``UUIDValidationRule``
+- ``JSONValidationRule``
 
 ### Articles
 
