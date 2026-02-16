@@ -5,7 +5,7 @@
 
 import ValidatorCore
 
-// 1. LengthValidationRule - validates string length
+/// 1. LengthValidationRule - validates string length
 let lengthRule = LengthValidationRule(min: 3, max: 20, error: "Length must be 3-20 characters")
 
 let shortString = "ab"
@@ -18,7 +18,7 @@ print("'\(validString)' is valid: \(lengthRule.validate(input: validString))") /
 print("'\(longString)' is valid: \(lengthRule.validate(input: longString))") // false
 print()
 
-// 2. NonEmptyValidationRule - checks if string is not empty
+/// 2. NonEmptyValidationRule - checks if string is not empty
 let nonEmptyRule = NonEmptyValidationRule(error: "Field is required")
 
 let emptyString = ""
@@ -31,7 +31,7 @@ print("'\(whitespaceString)' is valid: \(nonEmptyRule.validate(input: whitespace
 print("'\(filledString)' is valid: \(nonEmptyRule.validate(input: filledString))") // true
 print()
 
-// 3. PrefixValidationRule - validates string prefix
+/// 3. PrefixValidationRule - validates string prefix
 let prefixRule = PrefixValidationRule(prefix: "https://", error: "URL must start with https://")
 
 let httpURL = "http://example.com"
@@ -44,7 +44,7 @@ print("'\(httpsURL)' is valid: \(prefixRule.validate(input: httpsURL))") // true
 print("'\(noProtocol)' is valid: \(prefixRule.validate(input: noProtocol))") // false
 print()
 
-// 4. SuffixValidationRule - validates string suffix
+/// 4. SuffixValidationRule - validates string suffix
 let suffixRule = SuffixValidationRule(suffix: ".com", error: "Domain must end with .com")
 
 let comDomain = "example.com"
@@ -57,7 +57,7 @@ print("'\(orgDomain)' is valid: \(suffixRule.validate(input: orgDomain))") // fa
 print("'\(noDomain)' is valid: \(suffixRule.validate(input: noDomain))") // false
 print()
 
-// 5. RegexValidationRule - validates using regular expression
+/// 5. RegexValidationRule - validates using regular expression
 let phoneRule = RegexValidationRule(pattern: "^\\d{3}-\\d{4}$", error: "Invalid phone format")
 
 let validPhone = "123-4567"
@@ -70,7 +70,7 @@ print("'\(invalidPhone1)' is valid: \(phoneRule.validate(input: invalidPhone1))"
 print("'\(invalidPhone2)' is valid: \(phoneRule.validate(input: invalidPhone2))") // false
 print()
 
-// 6. URLValidationRule - validates URL format
+/// 6. URLValidationRule - validates URL format
 let urlRule = URLValidationRule(error: "Please enter a valid URL")
 
 let validURL = "https://www.apple.com"
@@ -83,7 +83,7 @@ print("'\(invalidURL)' is valid: \(urlRule.validate(input: invalidURL))") // fal
 print("'\(localURL)' is valid: \(urlRule.validate(input: localURL))") // true
 print()
 
-// 7. CreditCardValidationRule - validates credit card number (Luhn algorithm)
+/// 7. CreditCardValidationRule - validates credit card number (Luhn algorithm)
 let cardRule = CreditCardValidationRule(error: "Invalid card number")
 
 let validCard = "4532015112830366" // Valid Visa test number
@@ -96,7 +96,7 @@ print("'\(invalidCard)' is valid: \(cardRule.validate(input: invalidCard))") // 
 print("'\(shortCard)' is valid: \(cardRule.validate(input: shortCard))") // false
 print()
 
-// 8. EmailValidationRule - validates email format
+/// 8. EmailValidationRule - validates email format
 let emailRule = EmailValidationRule(error: "Please enter a valid email")
 
 let validEmail = "user@example.com"
@@ -109,7 +109,7 @@ print("'\(invalidEmail1)' is valid: \(emailRule.validate(input: invalidEmail1))"
 print("'\(invalidEmail2)' is valid: \(emailRule.validate(input: invalidEmail2))") // false
 print()
 
-// 9. CharactersValidationRule - validates allowed characters
+/// 9. CharactersValidationRule - validates allowed characters
 let lettersRule = CharactersValidationRule(characterSet: .letters, error: "Invalid characters")
 
 let onlyLetters = "HelloWorld"
@@ -122,7 +122,7 @@ print("'\(withNumbers)' is valid: \(lettersRule.validate(input: withNumbers))") 
 print("'\(withSpaces)' is valid: \(lettersRule.validate(input: withSpaces))") // false
 print()
 
-// 10. NilValidationRule - validates that value is nil
+/// 10. NilValidationRule - validates that value is nil
 let nilRule = NilValidationRule<String>(error: "Value must be nil")
 
 let nilValue: String? = nil
