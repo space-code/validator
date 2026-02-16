@@ -22,5 +22,7 @@ import Foundation
 /// ```
 extension String: IValidationError {
     /// Returns the string itself as the error message.
-    public var message: String { self }
+    public var message: String {
+        self
+    }
 }
