@@ -317,7 +317,7 @@ struct RegistrationView: View {
 | `IBANValidationRule` | Validates that a string is a valid IBAN (International Bank Account Number) | `IBANValidationRule(error: "Invalid IBAN")`
 | `IPAddressValidationRule` | Validates that a string is a valid IPv4 or IPv6 address | `IPAddressValidationRule(version: .v4, error: ValidationError("Invalid IPv4"))`
 | `PostalCodeValidationRule` | Validates postal/ZIP codes for different countries | `PostalCodeValidationRule(country: .uk, error: "Invalid post code")`
-| `Base64ValidationRule` | | `Base64ValidationRule(error: "The input is not valid Base64.")`
+| `Base64ValidationRule` | Validates that a string represents valid Base64-encoded data. | `Base64ValidationRule(error: "The input is not valid Base64.")`
 | `UUIDValidationRule` | Validates UUID format | `UUIDValidationRule(error: "Please enter a valid UUID")` |
 | `JSONValidationRule` | Validates that a string represents valid JSON | `JSONValidationRule(error: "Invalid JSON")`
  
