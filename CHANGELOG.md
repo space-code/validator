@@ -14,7 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `1.0.x` Releases - [1.0.1](#101) | [1.0.0](#100)
 
 ---
+## [Unreleased]
 
+### Documentation
+- Update `README.md`
+  - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#117](https://github.com/space-code/validator/pull/117).
 
 ## [1.5.0](https://github.com/space-code/validator/releases/tag/1.5.0)
 
@@ -218,6 +222,7 @@ Released on 2023-10-09. All issues associated with this milestone can be found u
 - Implement `Validator` package
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#1](https://github.com/space-code/validator/pull/1).
 
+[unreleased]: https://github.com/space-code/validator/compare/1.5.0..HEAD
 [1.5.0]: https://github.com/space-code/validator/compare/1.4.0..1.5.0
 [1.4.0]: https://github.com/space-code/validator/compare/1.3.0..1.4.0
 [1.3.0]: https://github.com/space-code/validator/compare/1.2.0..1.3.0
