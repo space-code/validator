@@ -1,7 +1,7 @@
 [tools]
 git-cliff = "2.9.1"
 swiftlint = "0.63.2"
-swiftformat = "0.61.0"
+swiftformat = "0.61.1"
 
 [settings]
 experimental = true
