@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update `README.md`
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#117](https://github.com/space-code/validator/pull/117).
 
+### Miscellaneous Tasks
+- Update `ci.yml`
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#136](https://github.com/space-code/validator/pull/136).
+
 ## [1.5.0](https://github.com/space-code/validator/releases/tag/1.5.0)
 
 Released on 2026-02-16. All issues associated with this milestone can be found using this [filter](https://github.com/space-code/validator/milestones?state=closed&q=1.5.0).
