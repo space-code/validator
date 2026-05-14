@@ -20,7 +20,7 @@ permissions:
 jobs:
   lint:
     name: lint
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,7 +31,7 @@ jobs:
 
   discover-typos:
     name: discover-typos
-    runs-on: macos-15
+    runs-on: macos-26
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
     steps:
