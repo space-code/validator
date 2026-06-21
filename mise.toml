@@ -1,6 +1,6 @@
 [tools]
 git-cliff = "2.13.1"
-swiftlint = "0.63.3"
+swiftlint = "0.64.0"
 swiftformat = "0.61.1"
 
 [settings]
