@@ -54,9 +54,7 @@ public final class FormFieldManager: IFormFieldManager {
 
     /// Recalculates the overall form validity by checking all registered validators.
     public func validate() {
-        // swiftlint:disable:next contains_over_filter_is_empty
-        isValid = validators
-            .filter { $0.validate() != .valid }
-            .isEmpty
+        isValid = !validators
+            .contains(where: { $0.validate() != .valid })
     }
 }

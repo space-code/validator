@@ -33,7 +33,9 @@ import XCTest
 
             // when
             if case .valid = result {}
-            else { XCTFail("The result must be equal to the valid value") }
+            else {
+                XCTFail("The result must be equal to the valid value")
+            }
         }
 
         @MainActor
@@ -56,7 +58,9 @@ import XCTest
             if case let .invalid(errors) = result {
                 XCTAssertEqual(errors.count, 1)
                 XCTAssertEqual(errors.first?.message, .error)
-            } else { XCTFail("The result must be equal to the invalid value") }
+            } else {
+                XCTFail("The result must be equal to the invalid value")
+            }
         }
     }
 
