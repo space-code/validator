@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Documented by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#117](https://github.com/space-code/validator/pull/117).
 
 ### Miscellaneous Tasks
+- Update simulator version in CI
+  - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#155](https://github.com/space-code/validator/pull/155).
 - Update `ci.yml`
   - Contributed by [@ns-vasilev](https://github.com/ns-vasilev) in Pull Request [#136](https://github.com/space-code/validator/pull/136).
 
