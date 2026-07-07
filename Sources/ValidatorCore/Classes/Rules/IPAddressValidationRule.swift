@@ -55,7 +55,9 @@ public struct IPAddressValidationRule: IValidationRule {
     // MARK: IValidationRule
 
     public func validate(input: String) -> Bool {
-        if input.isEmpty { return false }
+        if input.isEmpty {
+            return false
+        }
 
         if input.contains(" ") || input.contains("\t") || input.contains("\n") {
             return false
