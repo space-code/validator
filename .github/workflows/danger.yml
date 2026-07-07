@@ -22,7 +22,7 @@ jobs:
           ruby-version: 4.0.5
           bundler-cache: true
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup gems
         run: |
           gem install bundler
